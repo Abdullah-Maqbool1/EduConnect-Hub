@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduConnectHub</title>
+    <link rel="stylesheet" href="assets/css/variables.css">
+    <link rel="stylesheet" href="assets/css/accountsPage.css">
+</head>
+<body>
+    <div class="accounts-container">
+        <div class="accounts__background">
+            <img src="assets/images/accountsPageImg.jpg" alt="Education Background" class="accounts__image">
+        </div>
+        
+        <div class="accounts__forms">
+            <!-- Login Form -->
+            <div class="accounts__form accounts__form--login active">
+                <div class="accounts__header">
+                    <h2 class="accounts__title">Welcome to EduConnectHub</h2>
+                    <div class="accounts__tabs">
+                        <button class="accounts__tab accounts__tab--active" data-tab="login">Login</button>
+                        <button class="accounts__tab" data-tab="register">Register</button>
+                    </div>
+                </div>
+                
+                <form class="accounts__form-content">
+                    <div class="accounts__input-group">
+                        <label for="login-email" class="accounts__label">Email</label>
+                        <input type="email" id="login-email" class="accounts__input" placeholder="Enter your User email">
+                    </div>
+                    
+                    <div class="accounts__input-group">
+                        <label for="login-password" class="accounts__label">Password</label>
+                        <input type="password" id="login-password" class="accounts__input" placeholder="Enter your Password">
+                    </div>
+                    
+                    <div class="accounts__options">
+                        <div class="accounts__checkbox">
+                            <input type="checkbox" id="remember-me" class="accounts__checkbox-input">
+                            <label for="remember-me" class="accounts__checkbox-label">Remember me</label>
+                        </div>
+                        <a href="#" class="accounts__link">Forget Password?</a>
+                    </div>
+                    
+                    <button type="submit" class="accounts__button accounts__button--primary">Login</button>
+                </form>
+            </div>
+            
+            <!-- Register Form -->
+            <div class="accounts__form accounts__form--register">
+                <div class="accounts__header">
+                    <h2 class="accounts__title">Welcome to EduConnectHub</h2>
+                    <div class="accounts__tabs">
+                        <button class="accounts__tab" data-tab="login">Login</button>
+                        <button class="accounts__tab accounts__tab--active" data-tab="register">Register</button>
+                    </div>
+                </div>
+                
+                <form class="accounts__form-content">
+                    <div class="accounts__input-group">
+                        <label for="register-name" class="accounts__label">Full Name</label>
+                        <input type="text" id="register-name" class="accounts__input" placeholder="Enter your Full Name">
+                    </div>
+                    
+                    <div class="accounts__input-group">
+                        <label for="register-email" class="accounts__label">Email Address</label>
+                        <input type="email" id="register-email" class="accounts__input" placeholder="Enter your Email Address">
+                    </div>
+                    
+                    <div class="accounts__input-group">
+                        <label for="register-password" class="accounts__label">Password</label>
+                        <input type="password" id="register-password" class="accounts__input" placeholder="Enter your Password">
+                    </div>
+                    
+                    <div class="accounts__input-group">
+                        <label for="register-confirm-password" class="accounts__label">Confirm Password</label>
+                        <input type="password" id="register-confirm-password" class="accounts__input" placeholder="Enter your Confirm Password">
+                    </div>
+                    
+                    <div class="accounts__radio-group">
+                        <div class="accounts__radio">
+                            <input type="radio" id="user-student" name="user-type" class="accounts__radio-input" checked>
+                            <label for="user-student" class="accounts__radio-label">Student</label>
+                        </div>
+                        <div class="accounts__radio">
+                            <input type="radio" id="user-teacher" name="user-type" class="accounts__radio-input">
+                            <label for="user-teacher" class="accounts__radio-label">Teacher</label>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="accounts__button accounts__button--primary">Register</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/accountsPage.js"></script>
+</body>
+</html>

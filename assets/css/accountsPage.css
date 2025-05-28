@@ -1,0 +1,239 @@
+/* Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--body-font);
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+/* Accounts Container */
+.accounts-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+.accounts__background {
+    flex: 1;
+    position: relative;
+}
+
+.accounts__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    margin: var(--mb-4);
+}
+
+.accounts__forms {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: var(--pd-5);
+    position: relative;
+}
+
+/* Form Styles */
+.accounts__form {
+    width: 100%;
+    max-width: 400px;
+    background-color: var(--secondary-color);
+    padding: var(--pd-4);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    transition: all 0.5s ease;
+    position: absolute;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(20px);
+}
+
+.accounts__form.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+}
+
+.accounts__header {
+    margin-bottom: var(--mb-4);
+    text-align: center;
+}
+
+.accounts__title {
+    font-size: var(--small-font-size);
+    font-weight: var(--font-medium);
+    margin-bottom: var(--mb-3);
+    color: var(--text-color);
+}
+
+.accounts__tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: var(--mb-3);
+}
+
+.accounts__tab {
+    background: none;
+    border: none;
+    padding: var(--pd-1) var(--pd-3);
+    font-size: var(--h3-font-size);
+    font-weight: var(--font-medium);
+    color: var(--text-color-light);
+    cursor: pointer;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.accounts__tab--active {
+    color: var(--primary-color);
+}
+
+.accounts__tab--active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50%;
+    height: 2px;
+    background-color: var(--primary-color);
+    transition: width 0.3s ease;
+}
+
+.accounts__form-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--mb-4);
+}
+
+.accounts__input-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--mb-1);
+}
+
+.accounts__label {
+    font-size: var(--small-font-size);
+    font-weight: var(--font-medium);
+    color: var(--text-color);
+}
+
+.accounts__input {
+    padding: var(--pd-2);
+    border: 1px solid #ddd;
+    border-radius: var(--border-radius);
+    font-size: var(--normal-font-size);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.accounts__input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: var(--box-shadow);
+}
+
+.accounts__options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--mb-2);
+}
+
+.accounts__checkbox {
+    display: flex;
+    align-items: center;
+    gap: var(--mb-1);
+}
+
+.accounts__checkbox-input {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--primary-color);
+}
+
+.accounts__checkbox-label {
+    font-size: var(--small-font-size);
+    color: var(--text-color-light);
+}
+
+.accounts__link {
+    font-size: var(--small-font-size);
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.accounts__link:hover {
+    text-decoration: underline;
+}
+
+.accounts__button {
+    padding: var(--pd-2) var(--pd-3);
+    border: none;
+    border-radius: var(--border-radius);
+    font-size: var(--normal-font-size);
+    font-weight: var(--font-medium);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.accounts__button--primary {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+}
+
+.accounts__button--primary:hover {
+    background-color: #e08a19;
+    transform: translateY(-2px);
+    box-shadow: var(--box-shadow);
+}
+
+/* Radio Group Styles */
+.accounts__radio-group {
+    display: flex;
+    gap: var(--mb-3);
+    margin-bottom: var(--mb-2);
+}
+
+.accounts__radio {
+    display: flex;
+    align-items: center;
+    gap: var(--mb-1);
+}
+
+.accounts__radio-input {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--primary-color);
+}
+
+.accounts__radio-label {
+    font-size: var(--small-font-size);
+    color: var(--text-color-light);
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 768px) {
+    .accounts-container {
+        flex-direction: column;
+    }
+    
+    .accounts__background {
+        height: 200px;
+    }
+    
+    .accounts__forms {
+        padding: var(--pd-3);
+    }
+    
+    .accounts__form {
+        padding: var(--pd-3);
+    }
+}
