@@ -5,22 +5,30 @@
     box-sizing: border-box;
 }
 
+html, body {
+    overflow-x: hidden; /* Prevent horizontal scrollbar */
+    height: 100%;
+}
+
 body {
     font-family: var(--body-font);
     background-color: var(--background-color);
     color: var(--text-color);
     line-height: 1.6;
+    overflow: hidden; /* Prevent any scrollbars */
 }
 
 /* Accounts Container */
 .accounts-container {
     display: flex;
     min-height: 100vh;
+    overflow: hidden; /* Prevent scrollbars */
 }
 
 .accounts__background {
     flex: 1;
     position: relative;
+    overflow: hidden; /* Hide any overflow */
 }
 
 .accounts__image {
@@ -28,7 +36,7 @@ body {
     height: 100%;
     object-fit: cover;
     position: absolute;
-    margin: var(--mb-4);
+    margin: 0; /* Removed margin that was causing scrollbars */
 }
 
 .accounts__forms {
@@ -38,21 +46,26 @@ body {
     align-items: center;
     padding: var(--pd-5);
     position: relative;
+    overflow: hidden; /* Hide any overflow */
 }
 
-/* Form Styles */
+/* Form Styles - Fixed size transition */
 .accounts__form {
     width: 100%;
     max-width: 400px;
+    min-height: 500px; /* Fixed height to prevent size changes */
     background-color: var(--secondary-color);
     padding: var(--pd-4);
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow);
-    transition: all 0.5s ease;
+    transition: opacity 0.5s ease, visibility 0.5s ease, transform 0.5s ease;
     position: absolute;
     opacity: 0;
     visibility: hidden;
     transform: translateX(20px);
+    /* Add these to maintain consistent size */
+    display: flex;
+    flex-direction: column;
 }
 
 .accounts__form.active {
@@ -61,6 +74,7 @@ body {
     transform: translateX(0);
 }
 
+/* Rest of your existing CSS remains the same */
 .accounts__header {
     margin-bottom: var(--mb-4);
     text-align: center;
@@ -111,6 +125,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: var(--mb-4);
+    flex-grow: 1; /* Make form content take available space */
 }
 
 .accounts__input-group {
