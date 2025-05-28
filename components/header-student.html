@@ -1,15 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>EduConnect Hub - Student Header</title>
+    <link rel="stylesheet" href="/assets/css/variables.css">
+    <link rel="stylesheet" href="/assets/css/studentHeaderStyle.css">
 </head>
+
 <body>
-    
+    <header class="main-header">
+        <div class="header-container">
+            <!-- Logo Section -->
+            <div class="logo-section">
+                <img src="/assets/images/EduconnectHubLogo.png" alt="Logo" class="logo-img">
+            </div>
+
+
+            <div class="right-side">
+                <!-- Navigation Menu -->
+                <nav class="navigation">
+                    <ul class="nav-menu">
+                        <li class="nav-item">
+                            <a href="/studentDashboard.html" class="nav-link active">Dashboard</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="coursesMaterial.html" class="nav-link">Courses Material</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="feedback.html" class="nav-link">Feedback</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="digitalLibrary.html" class="nav-link">Digital Library</a>
+                        </li>
+                    </ul>
+                </nav>
+
+
+                <!-- Profile -->
+                <div class="student__profile">
+                    <svg width="30" height="30" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M10.5417 37.375C10.5417 37.375 17.2501 34.5 19.1667 32.5833C21.0834 30.6667 15.3334 30.6667 15.3334 21.0833C15.3334 11.5 23.0001 11.5 23.0001 11.5C23.0001 11.5 30.6667 11.5 30.6667 21.0833C30.6667 30.6667 24.9167 30.6667 26.8334 32.5833C28.7501 34.5 35.4584 37.375 35.4584 37.375"
+                            stroke="#F8981C" stroke-width="4" stroke-linecap="round" />
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M22.9999 42.1666C33.5854 42.1666 42.1666 33.5854 42.1666 22.9999C42.1666 12.4145 33.5854 3.83325 22.9999 3.83325C12.4145 3.83325 3.83325 12.4145 3.83325 22.9999C3.83325 33.5854 12.4145 42.1666 22.9999 42.1666Z"
+                            stroke="#F8981C" stroke-width="4" />
+                    </svg>
+
+                </div>
+
+
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+
+
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <ul class="mobile-nav-menu">
+            <li class="mobile-nav-item">
+                <a href="/studentDashboard.html" class="mobile-nav-link active">Dashboard</a>
+            </li>
+            <li class="mobile-nav-item">
+                <a href="coursesMaterial.html" class="mobile-nav-link">Courses Material</a>
+            </li>
+            <li class="mobile-nav-item">
+                <a href="feedback.html" class="mobile-nav-link">Feedback</a>
+            </li>
+            <li class="mobile-nav-item">
+                <a href="digitalLibrary.html" class="mobile-nav-link">Digital Library</a>
+            </li>
+        </ul>
+
+        <div class="mobile-student__profile">
+
+        </div>
+    </div>
+
 </body>
+
 </html>
-
-
-
-
