@@ -7,6 +7,7 @@
   --text-color-light: #353535;
   --background-color: #fff;
   --shadow-color: rgba(76, 70, 70, 0.1);
+  --hover-color: #ea8807;
 
   /* Font and Typography */
   --body-font: 'Poppins', sans-serif;
@@ -44,6 +45,10 @@
                   0px 6px 12px 0px rgba(0, 0, 0, 0.08);
   /* z-index */
   --z-fixed: 100;
+
+
+  --my-transition: color 0.3s ease;
+  
 }
 
 @media screen and (min-width: 768px) {
