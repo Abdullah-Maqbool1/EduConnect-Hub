@@ -82,7 +82,6 @@ body {
   border-radius: var(--border-radius);
   font-size: var(--small-font-size);
   font-weight: var(--font-small);
-  font-family: var(--body-font);
   padding: var(--pd-2) var(--pd-3);
   margin-bottom: var(--mb-1);
 

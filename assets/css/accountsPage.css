@@ -22,7 +22,7 @@ body {
 .accounts-container {
     display: flex;
     min-height: 100vh;
-    overflow: hidden; /* Prevent scrollbars */
+    overflow: hidden; 
 }
 
 .accounts__background {
@@ -34,9 +34,9 @@ body {
 .accounts__image {
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    position: absolute;
-    margin: 0; /* Removed margin that was causing scrollbars */
+    margin: 0;
+    padding: var(--pd-3) var(--pd-4);
+    border-radius: 29px;
 }
 
 .accounts__forms {
@@ -55,15 +55,13 @@ body {
     max-width: 400px;
     min-height: 500px; /* Fixed height to prevent size changes */
     background-color: var(--secondary-color);
-    padding: var(--pd-4);
+    padding: var(--pd-1);
     border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow);
-    transition: opacity 0.5s ease, visibility 0.5s ease, transform 0.5s ease;
+    transition: opacity 0.3s ease, visibility 0.5s ease, transform 0.5s ease;
     position: absolute;
     opacity: 0;
     visibility: hidden;
-    transform: translateX(20px);
-    /* Add these to maintain consistent size */
+    transform: translateX(10px);
     display: flex;
     flex-direction: column;
 }
@@ -74,7 +72,6 @@ body {
     transform: translateX(0);
 }
 
-/* Rest of your existing CSS remains the same */
 .accounts__header {
     margin-bottom: var(--mb-4);
     text-align: center;
@@ -90,7 +87,7 @@ body {
 .accounts__tabs {
     display: flex;
     justify-content: center;
-    margin-bottom: var(--mb-3);
+    margin-bottom: var(--mb-1);
 }
 
 .accounts__tab {
@@ -124,41 +121,43 @@ body {
 .accounts__form-content {
     display: flex;
     flex-direction: column;
-    gap: var(--mb-4);
+    gap: var(--mb-1);
     flex-grow: 1; /* Make form content take available space */
 }
 
 .accounts__input-group {
     display: flex;
     flex-direction: column;
-    gap: var(--mb-1);
+    gap: var(--mb-2);
 }
 
 .accounts__label {
     font-size: var(--small-font-size);
     font-weight: var(--font-medium);
     color: var(--text-color);
+    margin-bottom: -2%;
 }
 
 .accounts__input {
     padding: var(--pd-2);
-    border: 1px solid #ddd;
+    border: 1px solid var(--primary-color);
     border-radius: var(--border-radius);
-    font-size: var(--normal-font-size);
+    font-size: var(--small-font-size);
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .accounts__input:focus {
     outline: none;
     border-color: var(--primary-color);
-    box-shadow: var(--box-shadow);
+    transition: ease 0.2s;
+    box-shadow: 0 0 0 1px var(--primary-color); 
 }
 
 .accounts__options {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: var(--mb-2);
+    margin-bottom: var(--mb-4);
 }
 
 .accounts__checkbox {
@@ -232,23 +231,4 @@ body {
 .accounts__radio-label {
     font-size: var(--small-font-size);
     color: var(--text-color-light);
-}
-
-/* Responsive Styles */
-@media screen and (max-width: 768px) {
-    .accounts-container {
-        flex-direction: column;
-    }
-    
-    .accounts__background {
-        height: 200px;
-    }
-    
-    .accounts__forms {
-        padding: var(--pd-3);
-    }
-    
-    .accounts__form {
-        padding: var(--pd-3);
-    }
 }
