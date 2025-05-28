@@ -1,0 +1,58 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap'");
+:root {
+  /* Colors */
+  --primary-color: #F8981C;
+  --secondary-color: #ffffff;
+  --text-color: #333;
+  --text-color-light: #353535;
+  --background-color: #fff;
+  --shadow-color: rgba(76, 70, 70, 0.1);
+
+  /* Font and Typography */
+  --body-font: 'Poppins', sans-serif;
+  --h2-font-size: 1.5rem;
+  --h3-font-size: 1rem;
+  --normal-font-size: 1rem;
+  --small-font-size: 0.875rem;
+  --smaller-font-size: 0.75rem;
+  --font-small: 250;
+  --font-medium: 500;
+  --font-bold: 700;
+
+  /* Margins */
+  --mb-1: 0.5rem;
+  --mb-2: 1rem;
+  --mb-3: 1.5rem;
+  --mb-4: 2rem;
+  --mb-5: 2.5rem;
+
+  /* Paddings */
+  --pd-1: 0.3rem;
+  --pd-2: 0.7rem;
+  --pd-3: 1.5rem;
+  --pd-4: 2rem;
+  --pd-5: 6rem;
+
+
+
+
+  /* Border Radius */
+  --border-radius: 10px;
+
+  /* Box Shadow */
+   --box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.04), 
+                  0px 6px 12px 0px rgba(0, 0, 0, 0.08);
+  /* z-index */
+  --z-fixed: 100;
+}
+
+@media screen and (min-width: 768px) {
+  :root {
+    --h1-font-size: 2rem;
+    --h2-font-size: 1.75rem;
+    --h3-font-size: 1.25rem;
+    --normal-font-size: 1rem;
+    --small-font-size: 0.875rem;
+    --smaller-font-size: 0.813rem;
+  }
+}
