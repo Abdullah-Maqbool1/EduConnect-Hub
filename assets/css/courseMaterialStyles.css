@@ -77,6 +77,7 @@ body {
 
 .create-course__input,
 .create-course__textarea {
+  font-family: var(--body-font);
   padding: var(--pd-1);
   border: 1px solid var(--primary-color);
   border-radius: var(--border-radius);
@@ -84,12 +85,11 @@ body {
   font-weight: var(--font-small);
   padding: var(--pd-2) var(--pd-3);
   margin-bottom: var(--mb-1);
-
 }
 
 .create-course__input:focus,
 .create-course__textarea:focus {
-outline: none;
+  outline: none;
   border-color: var(--primary-color);
   box-shadow: 0 0 0 1px var(--primary-color); 
   transition: ease 0.2s;
