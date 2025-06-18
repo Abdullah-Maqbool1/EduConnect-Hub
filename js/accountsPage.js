@@ -1,57 +1,106 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // Get all elements
-    const loginForm = document.querySelector('.accounts__form--login');
-    const registerForm = document.querySelector('.accounts__form--register');
-    const loginTab = document.querySelectorAll('[data-tab="login"]');
-    const registerTab = document.querySelectorAll('[data-tab="register"]');
-    
-    // Function to switch forms
-    function switchForm(tab) {
-        // First reset all forms and tabs
-        loginForm.classList.remove('active');
-        registerForm.classList.remove('active');
-        
-        // Note: We're using querySelectorAll and looping because there are multiple tabs
-        loginTab.forEach(tab => tab.classList.remove('accounts__tab--active'));
-        registerTab.forEach(tab => tab.classList.remove('accounts__tab--active'));
-        
-        if (tab === 'login') {
-            loginForm.classList.add('active');
-            loginTab.forEach(tab => tab.classList.add('accounts__tab--active'));
-        } else {
-            registerForm.classList.add('active');
-            registerTab.forEach(tab => tab.classList.add('accounts__tab--active'));
-        }
+document.addEventListener('DOMContentLoaded', function () {
+  // Get form and tab elements
+  const loginForm = document.querySelector('.accounts__form--login');
+  const registerForm = document.querySelector('.accounts__form--register');
+  const loginTabs = document.querySelectorAll('[data-tab="login"]');
+  const registerTabs = document.querySelectorAll('[data-tab="register"]');
+
+  // Function to switch between login/register forms
+  function switchForm(tab) {
+    loginForm.classList.remove('active');
+    registerForm.classList.remove('active');
+    loginTabs.forEach(tab => tab.classList.remove('accounts__tab--active'));
+    registerTabs.forEach(tab => tab.classList.remove('accounts__tab--active'));
+
+    if (tab === 'login') {
+      loginForm.classList.add('active');
+      loginTabs.forEach(tab => tab.classList.add('accounts__tab--active'));
+      document.title = "Login - EduConnectHub";
+    } else {
+      registerForm.classList.add('active');
+      registerTabs.forEach(tab => tab.classList.add('accounts__tab--active'));
+      document.title = "Register - EduConnectHub";
     }
-    
-    // Add event listeners to all tabs (since there are multiple in your HTML)
-    document.querySelectorAll('[data-tab="login"]').forEach(tab => {
-        tab.addEventListener('click', function(e) {
-            e.preventDefault();
-            switchForm('login');
-        });
+  }
+
+  // Add tab switching events
+  loginTabs.forEach(tab => {
+    tab.addEventListener('click', e => {
+      e.preventDefault();
+      switchForm('login');
     });
-    
-    document.querySelectorAll('[data-tab="register"]').forEach(tab => {
-        tab.addEventListener('click', function(e) {
-            e.preventDefault();
-            switchForm('register');
-        });
+  });
+
+  registerTabs.forEach(tab => {
+    tab.addEventListener('click', e => {
+      e.preventDefault();
+      switchForm('register');
     });
-    
-    // Form submission handlers
-    document.querySelector('.accounts__form--login .accounts__form-content')
-        .addEventListener('submit', function(e) {
-            e.preventDefault();
-            console.log('Login form submitted');
-        });
-    
-    document.querySelector('.accounts__form--register .accounts__form-content')
-        .addEventListener('submit', function(e) {
-            e.preventDefault();
-            console.log('Register form submitted');
-        });
-    
-    // Initialize with login form active
-    switchForm('login');
+  });
+
+  // Handle registration
+  registerForm.querySelector('.accounts__form-content').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const name = document.getElementById("register-name").value.trim();
+    const email = document.getElementById("register-email").value.trim();
+    const password = document.getElementById("register-password").value;
+    const confirmPassword = document.getElementById("register-confirm-password").value;
+    const role = document.getElementById("user-teacher").checked ? "teacher" : "student";
+
+    if (!name || !email || !password || !confirmPassword) {
+      alert("Please fill in all fields.");
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      alert("Passwords do not match.");
+      return;
+    }
+
+    let users = JSON.parse(localStorage.getItem("users")) || [];
+
+    const userExists = users.some(user => user.email === email);
+    if (userExists) {
+      alert("Email already registered.");
+      return;
+    }
+
+    users.push({ name, email, password, role });
+    localStorage.setItem("users", JSON.stringify(users));
+    alert("Registration successful! You can now log in.");
+    switchForm("login");
+  });
+
+  // Handle login
+  loginForm.querySelector('.accounts__form-content').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const email = document.getElementById("login-email").value.trim();
+    const password = document.getElementById("login-password").value;
+
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+    const foundUser = users.find(user => user.email === email && user.password === password);
+
+    if (!foundUser) {
+      alert("Invalid email or password.");
+      return;
+    }
+
+    // Save login session info
+    localStorage.setItem("loggedIn", "true");
+    localStorage.setItem("name", foundUser.name);
+    localStorage.setItem("email", foundUser.email);
+    localStorage.setItem("role", foundUser.role);
+
+    // Redirect to correct dashboard
+    if (foundUser.role === "student") {
+      window.location.href = "student.html";
+    } else {
+      window.location.href = "teacher.html";
+    }
+  });
+
+  // Load login tab by default
+  switchForm('login');
 });
