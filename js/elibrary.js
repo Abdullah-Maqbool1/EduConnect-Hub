@@ -128,6 +128,21 @@ class ELibrary {
         if (clearFormBtn) {
             clearFormBtn.addEventListener('click', () => this.clearUploadForm());
         }
+
+        // Add floating upload button for file uploads
+        this.addFloatingUploadButton();
+    }
+
+    addFloatingUploadButton() {
+        if (this.currentUser.role !== 'teacher') return;
+
+        const floatingBtn = document.createElement('button');
+        floatingBtn.className = 'floating-upload-btn';
+        floatingBtn.innerHTML = '<i class="fas fa-plus"></i>';
+        floatingBtn.title = 'Upload Resource';
+        floatingBtn.addEventListener('click', () => this.showUploadModal());
+
+        document.body.appendChild(floatingBtn);
     }
 
     // =====================
@@ -358,6 +373,315 @@ class ELibrary {
         }
     }
 
+    showUploadModal() {
+        this.createUploadModal();
+        const modal = document.getElementById('upload-modal');
+        modal.classList.add('show');
+        document.body.style.overflow = 'hidden';
+    }
+
+    hideUploadModal() {
+        const modal = document.getElementById('upload-modal');
+        if (modal) {
+            modal.classList.remove('show');
+            document.body.style.overflow = 'auto';
+            setTimeout(() => {
+                modal.remove();
+            }, 300);
+        }
+    }
+
+    createUploadModal() {
+        // Remove existing modal if present
+        const existingModal = document.getElementById('upload-modal');
+        if (existingModal) {
+            existingModal.remove();
+        }
+
+        const modal = document.createElement('div');
+        modal.id = 'upload-modal';
+        modal.className = 'upload-modal';
+        modal.innerHTML = `
+            <div class="modal-overlay" onclick="eLibrary.hideUploadModal()"></div>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3><i class="fas fa-cloud-upload-alt"></i> Upload Resource</h3>
+                    <button class="modal-close" onclick="eLibrary.hideUploadModal()">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                
+                <form class="modal-form" id="modal-upload-form">
+                    <div class="upload-type-selector">
+                        <div class="upload-type-option active" data-type="file">
+                            <i class="fas fa-file-upload"></i>
+                            <span>Upload File</span>
+                        </div>
+                        <div class="upload-type-option" data-type="link">
+                            <i class="fas fa-link"></i>
+                            <span>Add Link</span>
+                        </div>
+                    </div>
+
+                    <div class="form-section file-upload-section">
+                        <div class="file-drop-zone" id="file-drop-zone">
+                            <div class="drop-zone-content">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <p>Drag & drop your file here or <span class="browse-link">browse</span></p>
+                                <small>Supported formats: PDF, MP4, MOV, AVI, DOCX, PPTX (Max 100MB)</small>
+                            </div>
+                            <input type="file" id="file-input" accept=".pdf,.mp4,.mov,.avi,.docx,.pptx" hidden>
+                        </div>
+                        
+                        <div class="file-preview" id="file-preview" style="display: none;">
+                            <div class="file-info">
+                                <div class="file-icon">
+                                    <i class="fas fa-file"></i>
+                                </div>
+                                <div class="file-details">
+                                    <div class="file-name"></div>
+                                    <div class="file-size"></div>
+                                </div>
+                                <button type="button" class="remove-file-btn" onclick="eLibrary.removeSelectedFile()">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                            <div class="upload-progress" id="upload-progress" style="display: none;">
+                                <div class="progress-bar">
+                                    <div class="progress-fill"></div>
+                                </div>
+                                <div class="progress-text">0%</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section link-upload-section" style="display: none;">
+                        <div class="form-group">
+                            <label for="modal-resource-url">Resource URL *</label>
+                            <input type="url" id="modal-resource-url" placeholder="https://example.com/resource">
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="modal-resource-title">Title *</label>
+                                <input type="text" id="modal-resource-title" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="modal-resource-subject">Subject *</label>
+                                <select id="modal-resource-subject" required>
+                                    <option value="">Select Subject</option>
+                                    <option value="Computer Science">Computer Science</option>
+                                    <option value="Mathematics">Mathematics</option>
+                                    <option value="Physics">Physics</option>
+                                    <option value="Chemistry">Chemistry</option>
+                                    <option value="Biology">Biology</option>
+                                    <option value="English">English</option>
+                                    <option value="History">History</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="modal-resource-description">Description</label>
+                            <textarea id="modal-resource-description" rows="3" placeholder="Brief description of the resource..."></textarea>
+                        </div>
+                    </div>
+
+                    <div class="modal-actions">
+                        <button type="button" class="btn btn-secondary" onclick="eLibrary.hideUploadModal()">Cancel</button>
+                        <button type="submit" class="btn btn-primary" id="modal-submit-btn">
+                            <i class="fas fa-plus"></i> Add Resource
+                        </button>
+                    </div>
+                </form>
+            </div>
+        `;
+
+        document.body.appendChild(modal);
+        this.setupModalEventListeners();
+    }
+
+    setupModalEventListeners() {
+        // Upload type selector
+        document.querySelectorAll('.upload-type-option').forEach(option => {
+            option.addEventListener('click', (e) => {
+                const type = e.currentTarget.dataset.type;
+                this.switchUploadType(type);
+            });
+        });
+
+        // File drop zone
+        const dropZone = document.getElementById('file-drop-zone');
+        const fileInput = document.getElementById('file-input');
+        const browseLink = dropZone.querySelector('.browse-link');
+
+        // Browse link click
+        browseLink.addEventListener('click', () => fileInput.click());
+
+        // File input change
+        fileInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                this.handleFileSelection(file);
+            }
+        });
+
+        // Drag and drop events
+        dropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropZone.classList.add('drag-over');
+        });
+
+        dropZone.addEventListener('dragleave', () => {
+            dropZone.classList.remove('drag-over');
+        });
+
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropZone.classList.remove('drag-over');
+            const file = e.dataTransfer.files[0];
+            if (file) {
+                this.handleFileSelection(file);
+            }
+        });
+
+        // Modal form submission
+        document.getElementById('modal-upload-form').addEventListener('submit', (e) => {
+            this.handleModalResourceUpload(e);
+        });
+    }
+
+    switchUploadType(type) {
+        // Update active option
+        document.querySelectorAll('.upload-type-option').forEach(option => {
+            option.classList.remove('active');
+        });
+        document.querySelector(`[data-type="${type}"]`).classList.add('active');
+
+        // Show/hide sections
+        const fileSection = document.querySelector('.file-upload-section');
+        const linkSection = document.querySelector('.link-upload-section');
+
+        if (type === 'file') {
+            fileSection.style.display = 'block';
+            linkSection.style.display = 'none';
+        } else {
+            fileSection.style.display = 'none';
+            linkSection.style.display = 'block';
+        }
+    }
+
+    handleFileSelection(file) {
+        // Validate file
+        const maxSize = 100 * 1024 * 1024; // 100MB
+        const allowedTypes = ['application/pdf', 'video/mp4', 'video/quicktime', 'video/x-msvideo', 
+                             'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+                             'application/vnd.openxmlformats-officedocument.presentationml.presentation'];
+
+        if (file.size > maxSize) {
+            this.showToast('File size must be under 100MB', 'error');
+            return;
+        }
+
+        if (!allowedTypes.includes(file.type)) {
+            this.showToast('Unsupported file type', 'error');
+            return;
+        }
+
+        // Store selected file
+        this.selectedFile = file;
+
+        // Update UI
+        this.showFilePreview(file);
+        
+        // Auto-fill title if empty
+        const titleInput = document.getElementById('modal-resource-title');
+        if (!titleInput.value) {
+            titleInput.value = file.name.replace(/\.[^/.]+$/, ""); // Remove extension
+        }
+    }
+
+    showFilePreview(file) {
+        const dropZone = document.getElementById('file-drop-zone');
+        const preview = document.getElementById('file-preview');
+        const fileName = preview.querySelector('.file-name');
+        const fileSize = preview.querySelector('.file-size');
+        const fileIcon = preview.querySelector('.file-icon i');
+
+        // Hide drop zone, show preview
+        dropZone.style.display = 'none';
+        preview.style.display = 'block';
+
+        // Update file info
+        fileName.textContent = file.name;
+        fileSize.textContent = this.formatFileSize(file.size);
+
+        // Update icon based on file type
+        const iconClass = this.getFileIcon(file.type);
+        fileIcon.className = `fas fa-${iconClass}`;
+    }
+
+    removeSelectedFile() {
+        this.selectedFile = null;
+        const dropZone = document.getElementById('file-drop-zone');
+        const preview = document.getElementById('file-preview');
+        const fileInput = document.getElementById('file-input');
+
+        // Reset UI
+        dropZone.style.display = 'block';
+        preview.style.display = 'none';
+        fileInput.value = '';
+    }
+
+    formatFileSize(bytes) {
+        if (bytes === 0) return '0 Bytes';
+        const k = 1024;
+        const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+        const i = Math.floor(Math.log(bytes) / Math.log(k));
+        return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+    }
+
+    getFileIcon(mimeType) {
+        const iconMap = {
+            'application/pdf': 'file-pdf',
+            'video/mp4': 'file-video',
+            'video/quicktime': 'file-video',
+            'video/x-msvideo': 'file-video',
+            'application/vnd.openxmlformats-officedocument.wordprocessingml.document': 'file-word',
+            'application/vnd.openxmlformats-officedocument.presentationml.presentation': 'file-powerpoint'
+        };
+        return iconMap[mimeType] || 'file';
+    }
+
+    simulateFileUpload() {
+        return new Promise((resolve) => {
+            const progressBar = document.getElementById('upload-progress');
+            const progressFill = document.querySelector('.progress-fill');
+            const progressText = document.querySelector('.progress-text');
+
+            progressBar.style.display = 'block';
+            
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += Math.random() * 15;
+                if (progress > 100) progress = 100;
+
+                progressFill.style.width = progress + '%';
+                progressText.textContent = Math.round(progress) + '%';
+
+                if (progress >= 100) {
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        progressBar.style.display = 'none';
+                        resolve();
+                    }, 500);
+                }
+            }, 200);
+        });
+    }
+
     handleResourceUpload(e) {
         e.preventDefault();
         
@@ -405,6 +729,112 @@ class ELibrary {
         this.clearUploadForm();
         
         this.showToast('Resource added successfully!', 'success');
+    }
+
+    async handleModalResourceUpload(e) {
+        e.preventDefault();
+        
+        if (this.currentUser.role !== 'teacher') {
+            this.showToast('Only teachers can upload resources', 'error');
+            return;
+        }
+
+        const activeType = document.querySelector('.upload-type-option.active').dataset.type;
+        const title = document.getElementById('modal-resource-title').value.trim();
+        const subject = document.getElementById('modal-resource-subject').value;
+        const description = document.getElementById('modal-resource-description').value.trim();
+
+        // Validation
+        if (!title || !subject) {
+            this.showToast('Please fill in all required fields', 'error');
+            return;
+        }
+
+        let resourceType = '';
+        let resourceUrl = '';
+
+        if (activeType === 'file') {
+            if (!this.selectedFile) {
+                this.showToast('Please select a file to upload', 'error');
+                return;
+            }
+
+            // Determine resource type from file
+            const mimeType = this.selectedFile.type;
+            if (mimeType.includes('pdf')) {
+                resourceType = 'PDF';
+            } else if (mimeType.includes('video')) {
+                resourceType = 'Video';
+            } else {
+                resourceType = 'Document';
+            }
+
+            // Simulate file upload
+            const submitBtn = document.getElementById('modal-submit-btn');
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Uploading...';
+
+            try {
+                await this.simulateFileUpload();
+                
+                // In a real application, this would be the actual uploaded file URL
+                // For demo purposes, we'll create a mock URL
+                resourceUrl = `https://cdn.educonnect.com/files/${this.selectedFile.name}`;
+                
+            } catch (error) {
+                this.showToast('Upload failed. Please try again.', 'error');
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<i class="fas fa-plus"></i> Add Resource';
+                return;
+            }
+        } else {
+            // Link upload
+            const url = document.getElementById('modal-resource-url').value.trim();
+            
+            if (!url) {
+                this.showToast('Please enter a resource URL', 'error');
+                return;
+            }
+
+            // URL validation
+            try {
+                new URL(url);
+                resourceUrl = url;
+                resourceType = 'Link';
+            } catch {
+                this.showToast('Please enter a valid URL', 'error');
+                return;
+            }
+        }
+
+        // Create new resource
+        const newResource = {
+            id: 'res_' + Date.now(),
+            title: title,
+            type: resourceType,
+            subject: subject,
+            url: resourceUrl,
+            description: description,
+            addedOn: new Date().toISOString(),
+            views: 0,
+            bookmarks: 0,
+            addedBy: this.currentUser.userId,
+            isUploaded: activeType === 'file',
+            fileName: activeType === 'file' ? this.selectedFile.name : null,
+            fileSize: activeType === 'file' ? this.selectedFile.size : null
+        };
+
+        // Add resource
+        this.resources.unshift(newResource);
+        this.saveResources();
+        this.filteredResources = [...this.resources];
+        
+        // Update UI
+        this.renderResources();
+        this.updateAnalytics();
+        this.hideUploadModal();
+        
+        this.showToast(`Resource ${activeType === 'file' ? 'uploaded' : 'added'} successfully!`, 'success');
     }
 
     clearUploadForm() {
