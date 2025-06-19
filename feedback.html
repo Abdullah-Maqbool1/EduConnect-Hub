@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Feedback - EduConnect Hub</title>
+    <link rel="stylesheet" href="assets/css/variables.css">
+    <link rel="stylesheet" href="assets/css/feedbackStyle.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Page Header -->
+        <div class="page-header">
+            <h1 class="page-title">My Feedback</h1>
+            <p class="page-subtitle">Track and manage your submitted feedback</p>
+        </div>
+
+        <!-- Search and Filter Controls -->
+        <div class="controls-section">
+            <div class="search-filter-row">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" class="search-input" placeholder="Search feedback..." id="searchInput">
+                </div>
+                <select class="filter-select" id="typeFilter">
+                    <option value="">All Types</option>
+                    <option value="teacher">Teacher</option>
+                    <option value="material">Student</option>
+                    <option value="course">Course</option>
+                    <option value="material">Material</option>
+                </select>
+                <select class="filter-select" id="statusFilter">
+                    <option value="">All Status</option>
+                    <option value="reviewed">Reviewed</option>
+                    <option value="pending">Pending</option>
+                </select>
+                <input type="date" class="filter-select" id="dateFilter">
+            </div>
+        </div>
+
+        <!-- Statistics Section -->
+        <div class="stats-section">
+            <div class="stat-card">
+                <div class="stat-number total">5</div>
+                <div class="stat-label">Total Feedback</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number reviewed">3</div>
+                <div class="stat-label">Reviewed</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number pending">2</div>
+                <div class="stat-label">Pending</div>
+            </div>
+              <div class="stat-card">
+                <div class="stat-number pending">4.6</div>
+                <div class="stat-label">Avg Ratting</div>
+            </div>
+            
+        </div>
+
+        <!-- Feedback List -->
+        <div class="feedback-list" id="feedbackList">
+            <!-- Feedback Card 1 -->
+            <div class="feedback-card" data-type="teacher" data-status="reviewed" data-date="2024-01-15">
+                <div class="feedback-header">
+                    <div class="feedback-main">
+                        <div class="feedback-badges">
+                            <span class="badge teacher">Teacher</span>
+                            <span class="badge reviewed">Reviewed</span>
+                        </div>
+                        <h3 class="feedback-title">Prof. John Smith - Data Structures</h3>
+                        <div class="star-rating">
+                            <i class="fas fa-star star"></i>
+                            <i class="fas fa-star star"></i>
+                            <i class="fas fa-star star"></i>
+                            <i class="fas fa-star star"></i>
+                            <i class="fas fa-star star"></i>
+                            <span class="rating-text">5/5 stars</span>
+                        </div>
+                    </div>
+                    <div class="status-indicator reviewed">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Reviewed</span>
+                    </div>
+                </div>
+                <div class="feedback-comment">
+                    "Excellent teaching methodology and very helpful during office hours."
+                </div>
+                <div class="feedback-meta">
+                    <div class="meta-item">
+                        <i class="fas fa-calendar"></i>
+                        <span>Submitted on 2024-01-15</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feedback Card 2 -->
+            <div class="feedback-card" data-type="course" data-status="pending" data-date="2024-01-12">
+                <div class="feedback-header">
+                    <div class="feedback-main">
+                        <div class="feedback-badges">
+                            <span class="badge course">Course</span>
+                            <span class="badge pending">Pending</span>
+                        </div>
+                        <h3 class="feedback-title">Database Management Systems</h3>
+                        <div class="star-rating">
+                            <i class="fas fa-star star"></i>
+                            <i class="fas fa-star star"></i>
+                            <i class="fas fa-star star"></i>
+                            <i class="fas fa-star star"></i>
+                            <i class="fas fa-star star empty"></i>
+                            <span class="rating-text">4/5 stars</span>
+                        </div>
+                    </div>
+                    <div class="status-indicator pending">
+                        <i class="fas fa-clock"></i>
+                        <span>Pending</span>
+                    </div>
+                </div>
+                <div class="feedback-comment">
+                    "Great course content but could use more practical examples."
+                </div>
+                <div class="feedback-meta">
+                    <div class="meta-item">
+                        <i class="fas fa-calendar"></i>
+                        <span>Submitted on 2024-01-12</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feedback Card 3 -->
+            <div class="feedback-card" data-type="material" data-status="reviewed" data-date="2024-01-10">
+                <div class="feedback-header">
+                    <div class="feedback-main">
+                        <div class="feedback-badges">
+                            <span class="badge material">Material</span>
+                            <span class="badge reviewed">Reviewed</span>
+                        </div>
+                        <h3 class="feedback-title">Algorithm Notes.pdf</h3>
+                        <div class="star-rating">
+                            <i class="fas fa-star star"></i>
+                            <i class="fas fa-star star"></i>
+                            <i class="fas fa-star star"></i>
+                            <i class="fas fa-star star"></i>
+                            <i class="fas fa-star star"></i>
+                            <span class="rating-text">5/5 stars</span>
+                        </div>
+                    </div>
+                    <div class="status-indicator reviewed">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Reviewed</span>
+                    </div>
+                </div>
+                <div class="feedback-comment">
+                    "Very comprehensive and well-structured notes."
+                </div>
+                <div class="feedback-meta">
+                    <div class="meta-item">
+                        <i class="fas fa-calendar"></i>
+                        <span>Submitted on 2024-01-10</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feedback Card 4 -->
+            <div class="feedback-card" data-type="teacher" data-status="pending" data-date="2024-01-08">
+                <div class="feedback-header">
+                    <div class="feedback-main">
+                        <div class="feedback-badges">
+                            <span class="badge teacher">Teacher</span>
+                            <span class="badge pending">Pending</span>
+                        </div>
+                        <h3 class="feedback-title">Prof. Sarah Wilson - Web Development</h3>
+                        <div class="star-rating">
+                            <i class="fas fa-star star"></i>
+                            <i class="fas fa-star star"></i>
+                            <i class="fas fa-star star"></i>
+                            <i class="fas fa-star star"></i>
+                            <i class="fas fa-star star empty"></i>
+                            <span class="rating-text">4/5 stars</span>
+                        </div>
+                    </div>
+                    <div class="status-indicator pending">
+                        <i class="fas fa-clock"></i>
+                        <span>Pending</span>
+                    </div>
+                </div>
+                <div class="feedback-comment">
+                    "Good practical approach, would appreciate more theory coverage."
+                </div>
+                <div class="feedback-meta">
+                    <div class="meta-item">
+                        <i class="fas fa-calendar"></i>
+                        <span>Submitted on 2024-01-08</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feedback Card 5 -->
+            <div class="feedback-card" data-type="course" data-status="reviewed" data-date="2024-01-05">
+                <div class="feedback-header">
+                    <div class="feedback-main">
+                        <div class="feedback-badges">
+                            <span class="badge course">Course</span>
+                            <span class="badge reviewed">Reviewed</span>
+                        </div>
+                        <h3 class="feedback-title">Software Engineering</h3>
+                        <div class="star-rating">
+                            <i class="fas fa-star star"></i>
+                            <i class="fas fa-star star"></i>
+                            <i class="fas fa-star star"></i>
+                            <i class="fas fa-star star empty"></i>
+                            <i class="fas fa-star star empty"></i>
+                            <span class="rating-text">3/5 stars</span>
+                        </div>
+                    </div>
+                    <div class="status-indicator reviewed">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Reviewed</span>
+                    </div>
+                </div>
+                <div class="feedback-comment">
+                    "Course pace is a bit slow, content could be more updated."
+                </div>
+                <div class="feedback-meta">
+                    <div class="meta-item">
+                        <i class="fas fa-calendar"></i>
+                        <span>Submitted on 2024-01-05</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+ <script src="js/feedback.js"></script>
+</body>
+</html>
