@@ -640,47 +640,29 @@ body {
     color: #ef4444;
 }
 
-/* Upload Modal Styles */
-/* =================== */
+/* ADD THIS TO YOUR EXISTING CSS FILE */
 
-/* Floating Upload Button */
-.floating-upload-btn {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    width: 60px;
-    height: 60px;
-    background: linear-gradient(135deg, var(--primary-color), var(--hover-color));
-    border: none;
-    border-radius: 50%;
-    color: var(--secondary-color);
-    font-size: var(--h3-font-size);
-    cursor: pointer;
-    box-shadow: 0 4px 20px rgba(248, 152, 28, 0.3);
-    transition: all 0.3s ease;
-    z-index: 1000;
+/* Upload Button in Search Bar */
+.upload-button-section {
     display: flex;
     align-items: center;
-    justify-content: center;
+    margin-left: auto;
 }
 
-.floating-upload-btn:hover {
-    transform: translateY(-3px) scale(1.1);
-    box-shadow: 0 8px 25px rgba(248, 152, 28, 0.4);
+.search-filter-bar {
+    justify-content: space-between;
 }
 
-.floating-upload-btn:active {
-    transform: translateY(-1px) scale(1.05);
-}
-
-/* Upload Modal */
-.upload-modal {
+/* Modal Overlay */
+.modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 10000;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    z-index: 1000;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -689,61 +671,53 @@ body {
     transition: all 0.3s ease;
 }
 
-.upload-modal.show {
+.modal-overlay.show {
     opacity: 1;
     visibility: visible;
 }
 
-.modal-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(5px);
-}
-
-.modal-content {
-    position: relative;
+/* Upload Modal */
+.upload-modal {
     background-color: var(--secondary-color);
     border-radius: var(--border-radius);
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
     width: 90%;
-    max-width: 600px;
+    max-width: 800px;
     max-height: 90vh;
     overflow-y: auto;
-    transform: translateY(50px);
-    transition: transform 0.3s ease;
+    transform: scale(0.8) translateY(50px);
+    transition: all 0.3s ease;
 }
 
-.upload-modal.show .modal-content {
-    transform: translateY(0);
+.modal-overlay.show .upload-modal {
+    transform: scale(1) translateY(0);
 }
 
+/* Modal Header */
 .modal-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: var(--pd-3);
+    padding: var(--pd-4);
+    border-bottom: 2px solid #f0f0f0;
     background: linear-gradient(135deg, var(--primary-color), var(--hover-color));
     color: var(--secondary-color);
     border-radius: var(--border-radius) var(--border-radius) 0 0;
 }
 
 .modal-header h3 {
-    font-size: var(--h3-font-size);
+    font-size: var(--h2-font-size);
     margin: 0;
     display: flex;
     align-items: center;
     gap: var(--mb-2);
 }
 
-.modal-close {
+.modal-close-btn {
     background: none;
     border: none;
     color: var(--secondary-color);
-    font-size: var(--h3-font-size);
+    font-size: var(--h2-font-size);
     cursor: pointer;
     padding: var(--pd-1);
     border-radius: 4px;
@@ -755,72 +729,33 @@ body {
     justify-content: center;
 }
 
-.modal-close:hover {
+.modal-close-btn:hover {
     background-color: rgba(255, 255, 255, 0.1);
+    transform: rotate(90deg);
 }
 
-.modal-form {
-    padding: var(--pd-3);
+/* Modal Body */
+.modal-body {
+    padding: var(--pd-4);
 }
 
-/* Upload Type Selector */
-.upload-type-selector {
-    display: flex;
-    gap: var(--mb-2);
-    margin-bottom: var(--mb-4);
-    background-color: #f8f9fa;
-    border-radius: var(--border-radius);
-    padding: var(--pd-1);
-}
-
-.upload-type-option {
-    flex: 1;
-    padding: var(--pd-2);
-    border-radius: var(--border-radius);
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-align: center;
-    background-color: transparent;
-    border: 2px solid transparent;
-    color: var(--text-color-paragraph);
-}
-
-.upload-type-option:hover {
-    background-color: rgba(248, 152, 28, 0.1);
-    color: var(--primary-color);
-}
-
-.upload-type-option.active {
-    background-color: var(--primary-color);
-    color: var(--secondary-color);
-    border-color: var(--primary-color);
-}
-
-.upload-type-option i {
-    display: block;
-    font-size: var(--h3-font-size);
-    margin-bottom: var(--mb-1);
-}
-
-.upload-type-option span {
-    font-size: var(--small-font-size);
-    font-weight: var(--font-medium);
-}
-
-/* Form Sections */
-.form-section {
+/* File Upload Section */
+.file-upload-section {
     margin-bottom: var(--mb-4);
 }
 
-/* File Drop Zone */
 .file-drop-zone {
-    border: 2px dashed #e9ecef;
+    border: 3px dashed #e9ecef;
     border-radius: var(--border-radius);
-    padding: var(--pd-6);
+    padding: var(--pd-4);
     text-align: center;
-    cursor: pointer;
     transition: all 0.3s ease;
-    background-color: #f8f9fa;
+    cursor: pointer;
+    position: relative;
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .file-drop-zone:hover,
@@ -829,27 +764,324 @@ body {
     background-color: rgba(248, 152, 28, 0.05);
 }
 
-.drop-zone-content i {
+.drop-zone-content {
+    pointer-events: none;
+}
+
+.drop-icon {
     font-size: 3rem;
     color: var(--primary-color);
     margin-bottom: var(--mb-2);
+    opacity: 0.7;
 }
 
-.drop-zone-content p {
-    font-size: var(--normal-font-size);
+.file-drop-zone h4 {
     color: var(--text-color-light);
+    margin-bottom: var(--mb-1);
+    font-size: var(--h3-font-size);
+}
+
+.file-drop-zone p {
+    color: var(--text-color-paragraph);
+    font-size: var(--small-font-size);
+}
+
+/* File Preview */
+.file-preview {
+    background-color: #f8f9fa;
+    border-radius: var(--border-radius);
+    padding: var(--pd-3);
+    border: 2px solid #e9ecef;
+}
+
+.file-info {
+    display: flex;
+    align-items: center;
+    gap: var(--mb-3);
+}
+
+.file-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: var(--border-radius);
+    background: linear-gradient(135deg, var(--primary-color), var(--hover-color));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--h2-font-size);
+    color: var(--secondary-color);
+}
+
+.file-details {
+    flex: 1;
+}
+
+.file-name {
+    font-size: var(--normal-font-size);
+    font-weight: var(--font-medium);
+    color: var(--text-color-light);
+    margin-bottom: var(--mb-1);
+    word-break: break-all;
+}
+
+.file-size {
+    font-size: var(--small-font-size);
+    color: var(--text-color-paragraph);
+}
+
+.remove-file-btn {
+    background-color: #dc3545;
+    color: var(--secondary-color);
+    border: none;
+    border-radius: var(--border-radius);
+    padding: var(--pd-2);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: var(--normal-font-size);
+}
+
+.remove-file-btn:hover {
+    background-color: #c82333;
+    transform: scale(1.1);
+}
+
+/* Upload Progress */
+.upload-progress {
+    margin-top: var(--mb-3);
+}
+
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background-color: #e9ecef;
+    border-radius: 10px;
+    overflow: hidden;
     margin-bottom: var(--mb-1);
 }
 
-.browse-link {
-    color: var(--primary-color);
-    text-decoration: underline;
-    cursor: pointer;
-    font-weight: var(--font-medium);
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary-color), var(--hover-color));
+    border-radius: 10px;
+    transition: width 0.3s ease;
+    width: 0%;
 }
 
-/* .browse-link:hover {
-    color: var(-- */
+.progress-text {
+    font-size: var(--small-font-size);
+    color: var(--text-color-paragraph);
+    text-align: center;
+}
+
+/* Form Section */
+.form-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--mb-3);
+}
+
+.upload-modal-form .form-row {
+    display: flex;
+    gap: var(--mb-3);
+}
+
+.upload-modal-form .form-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--mb-1);
+}
+
+.upload-modal-form .form-group label {
+    font-size: var(--small-font-size);
+    font-weight: var(--font-medium);
+    color: var(--text-color-light);
+}
+
+.upload-modal-form .form-group input,
+.upload-modal-form .form-group select,
+.upload-modal-form .form-group textarea {
+    padding: var(--pd-2);
+    border: 2px solid #e9ecef;
+    border-radius: var(--border-radius);
+    font-size: var(--normal-font-size);
+    font-family: var(--body-font);
+    transition: all 0.3s ease;
+}
+
+.upload-modal-form .form-group input:focus,
+.upload-modal-form .form-group select:focus,
+.upload-modal-form .form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(248, 152, 28, 0.1);
+}
+
+.upload-modal-form .form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.form-help {
+    font-size: var(--smaller-font-size);
+    color: var(--text-color-paragraph);
+    font-style: italic;
+}
+
+/* Checkbox Groups */
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    gap: var(--mb-2);
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: var(--mb-2);
+    cursor: pointer;
+    font-size: var(--normal-font-size);
+    color: var(--text-color-light);
+}
+
+.checkbox-label input[type="checkbox"] {
+    display: none;
+}
+
+.checkbox-custom {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #e9ecef;
+    border-radius: 4px;
+    background-color: var(--secondary-color);
+    transition: all 0.3s ease;
+    position: relative;
+    flex-shrink: 0;
+}
+
+.checkbox-custom::after {
+    content: '\f00c';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    color: var(--secondary-color);
+    font-size: 12px;
+    transition: all 0.3s ease;
+}
+
+.checkbox-label input[type="checkbox"]:checked + .checkbox-custom {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.checkbox-label input[type="checkbox"]:checked + .checkbox-custom::after {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+/* Modal Actions */
+.modal-actions {
+    display: flex;
+    gap: var(--mb-2);
+    justify-content: flex-end;
+    margin-top: var(--mb-4);
+    padding-top: var(--pd-3);
+    border-top: 2px solid #f0f0f0;
+}
+
+.btn-outline {
+    background-color: transparent;
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+}
+
+.btn-outline:hover {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    transform: translateY(-2px);
+}
+
+/* File Type Icons */
+.file-icon.pdf .fas {
+    color: var(--secondary-color);
+}
+
+.file-icon.video .fas::before {
+    content: '\f03d';
+}
+
+.file-icon.image .fas::before {
+    content: '\f1c5';
+}
+
+.file-icon.document .fas::before {
+    content: '\f1c2';
+}
+
+.file-icon.presentation .fas::before {
+    content: '\f1c4';
+}
+
+/* Responsive Design for Modal */
+@media (max-width: 768px) {
+    .upload-modal {
+        width: 95%;
+        margin: var(--pd-2);
+        max-height: 95vh;
+    }
+    
+    .modal-header,
+    .modal-body {
+        padding: var(--pd-3);
+    }
+    
+    .upload-modal-form .form-row {
+        flex-direction: column;
+    }
+    
+    .modal-actions {
+        flex-direction: column-reverse;
+    }
+    
+    .modal-actions .btn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .file-drop-zone {
+        min-height: 150px;
+        padding: var(--pd-3);
+    }
+    
+    .drop-icon {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .upload-modal {
+        width: 98%;
+        margin: var(--pd-1);
+    }
+    
+    .modal-header,
+    .modal-body {
+        padding: var(--pd-2);
+    }
+    
+    .file-info {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .file-icon {
+        width: 50px;
+        height: 50px;
+        font-size: var(--h3-font-size);
+    }
+}
 
 /* Responsive Design */
 @media (max-width: 1200px) {
