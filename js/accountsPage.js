@@ -95,9 +95,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Redirect to correct dashboard
     if (foundUser.role === "student") {
-      window.location.href = "student.html";
+      window.location.href = "studentDashboard.html";
     } else {
-      window.location.href = "teacher.html";
+      window.location.href = "teacherDashboared.html";
     }
   });
 

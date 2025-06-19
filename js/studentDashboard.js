@@ -1,326 +1,481 @@
-   // Dashboard functionality
-        class StudentDashboard {
-            constructor() {
-                this.initializeLocalStorage();
-                this.bindEvents();
-                this.updateDashboard();
-            }
+// StudentDashboard.js
+class StudentDashboard {
+    constructor() {
+        this.currentUser = null;
+        this.init();
+    }
 
-            initializeLocalStorage() {
-                // Initialize default data if not exists
-                if (!localStorage.getItem('studentData')) {
-                    const defaultData = {
-                        stats: {
-                            totalCourses: 12,
-                            pendingFeedback: 3,
-                            libraryResources: 45,
-                            thisMonth: 8
-                        },
-                        activities: [
-                            { title: 'Data Structures Assignment', time: '2 hours ago', type: 'orange' },
-                            { title: 'Feedback on Prof. Smith', time: '1 day ago', type: 'gray' },
-                            { title: 'Algorithm Notes.pdf', time: '2 days ago', type: 'green' },
-                            { title: 'Database Project', time: '3 days ago', type: 'orange' },
-                            { title: 'Calculus Midterm Results', time: '5 days ago', type: 'green' },
-                            { title: 'Physics Lab Report Submitted', time: '1 week ago', type: 'gray' }
-                        ],
-                        courses: [
-                            { name: 'Data Structures', progress: 85, color: 'orange' },
-                            { name: 'Database Systems', progress: 72, color: 'blue' },
-                            { name: 'Web Development', progress: 94, color: 'green' },
-                            { name: 'Algorithms', progress: 58, color: 'orange' },
-                            { name: 'Software Engineering', progress: 67, color: 'blue' }
-                        ],
-                        achievements: [
-                            { title: 'Top Contributor', desc: 'Most uploads this month', icon: 'trophy' },
-                            { title: 'Active Learner', desc: '50+ downloads', icon: 'book' },
-                            { title: 'Community Helper', desc: 'Helpful feedback', icon: 'hands-helping' }
-                        ]
-                    };
-                    localStorage.setItem('studentData', JSON.stringify(defaultData));
-                }
-            }
+    init() {
+        // Check if user is logged in
+        this.checkAuthStatus();
+        
+        // If user exists, load dashboard data
+        if (this.currentUser) {
+            this.loadDashboardData();
+            this.bindEvents();
+        }
+    }
 
-            bindEvents() {
-                // Notification click
-                document.querySelector('.notification-btn').addEventListener('click', () => {
-                    this.showNotifications();
-                });
-
-                // Quick action buttons
-                document.querySelectorAll('button').forEach(btn => {
-                    if (btn.textContent.includes('Upload Material')) {
-                        btn.addEventListener('click', () => this.uploadMaterial());
-                    } else if (btn.textContent.includes('Submit Feedback')) {
-                        btn.addEventListener('click', () => this.submitFeedback());
-                    } else if (btn.textContent.includes('Browse Library')) {
-                        btn.addEventListener('click', () => this.browseLibrary());
-                    }
-                });
-            }
-
-            updateDashboard() {
-                const data = JSON.parse(localStorage.getItem('studentData'));
-                
-                // Update stats
-                const statNumbers = document.querySelectorAll('.stat-number');
-                statNumbers[0].textContent = data.stats.totalCourses;
-                statNumbers[1].textContent = data.stats.pendingFeedback;
-                statNumbers[2].textContent = data.stats.libraryResources;
-                statNumbers[3].textContent = data.stats.thisMonth;
-
-                // Update notification badge
-                document.querySelector('.notification-badge').textContent = data.stats.pendingFeedback;
-            }
-
-            showNotifications() {
-                alert('📢 Notifications:\n\n• New assignment in Data Structures\n• Feedback pending for Prof. Smith\n• Library book due tomorrow');
-            }
-
-            uploadMaterial() {
-                const data = JSON.parse(localStorage.getItem('studentData'));
-                
-                // Simulate file upload
-                const newActivity = {
-                    title: 'New Material Uploaded',
-                    time: 'Just now',
-                    type: 'green'
-                };
-                
-                data.activities.unshift(newActivity);
-                localStorage.setItem('studentData', JSON.stringify(data));
-                
-                // Update UI
-                this.refreshActivityList();
-                alert('✅ Material uploaded successfully!');
-            }
-
-            submitFeedback() {
-                const data = JSON.parse(localStorage.getItem('studentData'));
-                
-                // Simulate feedback submission
-                const newActivity = {
-                    title: 'Feedback Submitted',
-                    time: 'Just now',
-                    type: 'blue'
-                };
-                
-                data.activities.unshift(newActivity);
-                data.stats.pendingFeedback = Math.max(0, data.stats.pendingFeedback - 1);
-                localStorage.setItem('studentData', JSON.stringify(data));
-                
-                // Update UI
-                this.refreshActivityList();
-                this.updateDashboard();
-                alert('📝 Feedback submitted successfully!');
-            }
-
-            browseLibrary() {
-                alert('📚 Redirecting to Library...\n\nAvailable resources:\n• Research Papers\n• E-books\n• Video Lectures\n• Past Exam Papers');
-            }
-
-            refreshActivityList() {
-                const data = JSON.parse(localStorage.getItem('studentData'));
-                const activityContainer = document.querySelector('.scrollable-content');
-                
-                activityContainer.innerHTML = '';
-                
-                data.activities.forEach(activity => {
-                    const activityItem = document.createElement('div');
-                    activityItem.className = 'activity-item';
-                    activityItem.innerHTML = `
-                        <div class="activity-dot ${activity.type}"></div>
-                        <div class="activity-content">
-                            <div class="activity-title">${activity.title}</div>
-                            <div class="activity-time">${activity.time}</div>
-                        </div>
-                    `;
-                    activityContainer.appendChild(activityItem);
-                });
-            }
-
-            // Method to add new course
-            addCourse(courseName, initialProgress = 0) {
-                const data = JSON.parse(localStorage.getItem('studentData'));
-                const colors = ['orange', 'blue', 'green'];
-                const randomColor = colors[Math.floor(Math.random() * colors.length)];
-                
-                const newCourse = {
-                    name: courseName,
-                    progress: initialProgress,
-                    color: randomColor
-                };
-                
-                data.courses.push(newCourse);
-                data.stats.totalCourses++;
-                localStorage.setItem('studentData', JSON.stringify(data));
-                
-                this.updateDashboard();
-                this.refreshCourseProgress();
-            }
-
-            // Method to update course progress
-            updateCourseProgress(courseName, newProgress) {
-                const data = JSON.parse(localStorage.getItem('studentData'));
-                const course = data.courses.find(c => c.name === courseName);
-                
-                if (course) {
-                    course.progress = newProgress;
-                    localStorage.setItem('studentData', JSON.stringify(data));
-                    this.refreshCourseProgress();
-                }
-            }
-
-            refreshCourseProgress() {
-                const data = JSON.parse(localStorage.getItem('studentData'));
-                const progressContainer = document.querySelectorAll('.scrollable-content')[1];
-                
-                progressContainer.innerHTML = '';
-                
-                data.courses.forEach(course => {
-                    const progressItem = document.createElement('div');
-                    progressItem.className = 'progress-item';
-                    progressItem.innerHTML = `
-                        <div class="progress-header">
-                            <span class="progress-course">${course.name}</span>
-                            <span class="progress-percentage">${course.progress}%</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress-fill ${course.color}" style="width: ${course.progress}%"></div>
-                        </div>
-                    `;
-                    progressContainer.appendChild(progressItem);
-                });
-            }
-
-            // Method to simulate course completion
-            completeCourse(courseName) {
-                this.updateCourseProgress(courseName, 100);
-                
-                const data = JSON.parse(localStorage.getItem('studentData'));
-                const newActivity = {
-                    title: `${courseName} Course Completed! 🎉`,
-                    time: 'Just now',
-                    type: 'green'
-                };
-                
-                data.activities.unshift(newActivity);
-                localStorage.setItem('studentData', JSON.stringify(data));
-                this.refreshActivityList();
-            }
+    checkAuthStatus() {
+        // Check if user is logged in using your login system structure
+        const isLoggedIn = localStorage.getItem('loggedIn');
+        const userRole = localStorage.getItem('role');
+        
+        if (!isLoggedIn || isLoggedIn !== 'true') {
+            this.showLoginModal();
+            return;
         }
 
-        // Initialize dashboard when page loads
-        document.addEventListener('DOMContentLoaded', () => {
-            const dashboard = new StudentDashboard();
-            
-            // Make dashboard globally accessible for testing
-            window.dashboard = dashboard;
-            
-            // Auto-update progress bars animation
-            setTimeout(() => {
-                const progressBars = document.querySelectorAll('.progress-fill');
-                progressBars.forEach(bar => {
-                    const width = bar.style.width;
-                    bar.style.width = '0%';
-                    setTimeout(() => {
-                        bar.style.width = width;
-                    }, 100);
-                });
-            }, 500);
+        // Check if user is a student
+        if (userRole !== 'student') {
+            alert('Access denied. This dashboard is for students only.');
+            window.location.href = 'accountsPage.html'; // Redirect to login
+            return;
+        }
 
-            // Add some interactive features
-            document.querySelectorAll('.stat-card').forEach(card => {
-                card.addEventListener('click', function() {
-                    const title = this.querySelector('.stat-title').textContent;
-                    const number = this.querySelector('.stat-number').textContent;
-                    
-                    switch(title) {
-                        case 'Total Courses':
-                            alert(`📚 Total Courses: ${number}\n\nActive courses in your dashboard. Click on Course Progress to see detailed information.`);
-                            break;
-                        case 'Pending Feedback':
-                            alert(`📝 Pending Feedback: ${number}\n\nYou have ${number} feedback forms to complete. Click 'Submit Feedback' to get started.`);
-                            break;
-                        case 'Library Resources':
-                            alert(`📖 Library Resources: ${number}\n\nDigital resources available in your library. Click 'Browse Library' to explore.`);
-                            break;
-                        case 'This Month':
-                            alert(`📊 This Month: ${number}\n\nActivities completed this month. Keep up the great work!`);
-                            break;
-                    }
-                });
+        // Create user object from stored login data
+        this.currentUser = {
+            name: localStorage.getItem('name'),
+            email: localStorage.getItem('email'),
+            role: localStorage.getItem('role'),
+            id: localStorage.getItem('email') // Use email as unique identifier
+        };
+        
+        console.log('Current user:', this.currentUser);
+    }
+
+    showLoginModal() {
+        const modal = document.getElementById('login-modal');
+        if (modal) {
+            modal.style.display = 'flex';
+            modal.style.position = 'fixed';
+            modal.style.top = '0';
+            modal.style.left = '0';
+            modal.style.width = '100%';
+            modal.style.height = '100%';
+            modal.style.backgroundColor = 'rgba(0,0,0,0.5)';
+            modal.style.justifyContent = 'center';
+            modal.style.alignItems = 'center';
+            modal.style.zIndex = '1000';
+
+            const modalContent = modal.querySelector('.modal-content');
+            modalContent.style.backgroundColor = 'white';
+            modalContent.style.padding = '2rem';
+            modalContent.style.borderRadius = '8px';
+            modalContent.style.textAlign = 'center';
+            modalContent.style.maxWidth = '400px';
+
+            document.getElementById('login-redirect-btn').addEventListener('click', () => {
+                window.location.href = 'accountsPage.html'; // Updated to match your login page
             });
+        }
+    }
 
-            // Add hover effects to progress bars
-            document.querySelectorAll('.progress-item').forEach(item => {
-                item.addEventListener('mouseenter', function() {
-                    const progressBar = this.querySelector('.progress-fill');
-                    progressBar.style.transform = 'scaleY(1.2)';
-                    progressBar.style.transition = 'transform 0.3s ease';
-                });
-                
-                item.addEventListener('mouseleave', function() {
-                    const progressBar = this.querySelector('.progress-fill');
-                    progressBar.style.transform = 'scaleY(1)';
-                });
-            });
+    loadDashboardData() {
+        // Load user-specific data
+        this.loadUserInfo();
+        this.loadStatistics();
+        this.loadRecentActivity();
+        this.loadAchievements();
+    }
 
-            // Add click functionality to achievements
-            document.querySelectorAll('.achievement-item').forEach(item => {
-                item.addEventListener('click', function() {
-                    const title = this.querySelector('.achievement-title').textContent;
-                    const desc = this.querySelector('.achievement-desc').textContent;
-                    alert(`🏆 Achievement: ${title}\n\n${desc}\n\nCongratulations on your accomplishment!`);
-                });
-            });
+    loadUserInfo() {
+        const welcomeSpan = document.getElementById('student-name-welcome');
+        if (welcomeSpan && this.currentUser) {
+            welcomeSpan.textContent = this.currentUser.name || 'Student';
+        }
+    }
 
-            // Simulate real-time updates every 30 seconds
-            setInterval(() => {
-                // Randomly update some stats to simulate activity
-                const data = JSON.parse(localStorage.getItem('studentData'));
-                
-                // Occasionally add a new activity
-                if (Math.random() < 0.3) {
-                    const activities = [
-                        'New assignment posted',
-                        'Grade updated',
-                        'New library resource added',
-                        'Reminder: Assignment due soon'
-                    ];
-                    
-                    const randomActivity = activities[Math.floor(Math.random() * activities.length)];
-                    const newActivity = {
-                        title: randomActivity,
-                        time: 'Just now',
-                        type: ['orange', 'blue', 'green', 'gray'][Math.floor(Math.random() * 4)]
-                    };
-                    
-                    data.activities.unshift(newActivity);
-                    if (data.activities.length > 10) {
-                        data.activities.pop(); // Keep only last 10 activities
-                    }
-                    
-                    localStorage.setItem('studentData', JSON.stringify(data));
-                    dashboard.refreshActivityList();
-                }
-                
-                // Occasionally update course progress
-                if (Math.random() < 0.2) {
-                    const randomCourse = data.courses[Math.floor(Math.random() * data.courses.length)];
-                    if (randomCourse.progress < 100) {
-                        randomCourse.progress = Math.min(100, randomCourse.progress + Math.floor(Math.random() * 5) + 1);
-                        localStorage.setItem('studentData', JSON.stringify(data));
-                        dashboard.refreshCourseProgress();
-                    }
-                }
-            }, 30000); // Update every 30 seconds
+    loadStatistics() {
+        // Get user-specific statistics from localStorage or generate default ones
+        const userStats = this.getUserStats();
+        
+        document.getElementById('total-courses').textContent = userStats.totalCourses;
+        document.getElementById('pending-feedback').textContent = userStats.pendingFeedback;
+        document.getElementById('library-resources').textContent = userStats.libraryResources;
+        document.getElementById('this-month').textContent = userStats.thisMonth;
+    }
 
-            console.log('🎓 EduConnect Hub Student Dashboard loaded successfully!');
-            console.log('💡 Try these commands in console:');
-            console.log('   dashboard.addCourse("Machine Learning", 25)');
-            console.log('   dashboard.updateCourseProgress("Data Structures", 90)');
-            console.log('   dashboard.completeCourse("Web Development")');
+    getUserStats() {
+        // Try to get user-specific stats from localStorage
+        const statsKey = `userStats_${this.currentUser.email}`; // Use email as unique key
+        const savedStats = localStorage.getItem(statsKey);
+        
+        if (savedStats) {
+            return JSON.parse(savedStats);
+        }
+
+        // Generate default stats if none exist
+        const defaultStats = {
+            totalCourses: Math.floor(Math.random() * 15) + 5, // 5-20 courses
+            pendingFeedback: Math.floor(Math.random() * 8) + 1, // 1-8 pending
+            libraryResources: Math.floor(Math.random() * 100) + 20, // 20-120 resources
+            thisMonth: Math.floor(Math.random() * 12) + 3 // 3-15 this month
+        };
+
+        // Save the generated stats
+        localStorage.setItem(statsKey, JSON.stringify(defaultStats));
+        return defaultStats;
+    }
+
+    loadRecentActivity() {
+        const activityList = document.getElementById('activity-list');
+        const userActivities = this.getUserActivities();
+
+        if (userActivities.length === 0) {
+            activityList.innerHTML = `
+                <div class="activity-item">
+                    <div class="activity-dot gray"></div>
+                    <div class="activity-content">
+                        <div class="activity-title">No recent activity</div>
+                        <div class="activity-time">Start by uploading materials or submitting feedback</div>
+                    </div>
+                </div>
+            `;
+            return;
+        }
+
+        activityList.innerHTML = userActivities.map(activity => `
+            <div class="activity-item">
+                <div class="activity-dot ${activity.type}"></div>
+                <div class="activity-content">
+                    <div class="activity-title">${activity.title}</div>
+                    <div class="activity-time">${activity.time}</div>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    getUserActivities() {
+        const activitiesKey = `userActivities_${this.currentUser.email}`;
+        const savedActivities = localStorage.getItem(activitiesKey);
+        
+        if (savedActivities) {
+            return JSON.parse(savedActivities);
+        }
+
+        // Generate default activities if none exist
+        const defaultActivities = [
+            {
+                title: "Welcome to EduConnect Hub!",
+                time: "Account created successfully",
+                type: "green"
+            },
+            {
+                title: "Profile Setup Complete",
+                time: "Ready to start your learning journey",
+                type: "orange"
+            }
+        ];
+
+        localStorage.setItem(activitiesKey, JSON.stringify(defaultActivities));
+        return defaultActivities;
+    }
+
+    addActivity(title, type = 'gray') {
+        const activitiesKey = `userActivities_${this.currentUser.email}`;
+        const activities = this.getUserActivities();
+        
+        const newActivity = {
+            title: title,
+            time: this.getRelativeTime(new Date()),
+            type: type,
+            timestamp: new Date().toISOString()
+        };
+
+        activities.unshift(newActivity);
+        
+        // Keep only last 10 activities
+        if (activities.length > 10) {
+            activities.splice(10);
+        }
+
+        localStorage.setItem(activitiesKey, JSON.stringify(activities));
+        this.loadRecentActivity();
+    }
+
+    loadAchievements() {
+        const achievementsList = document.getElementById('achievements-list');
+        const userAchievements = this.getUserAchievements();
+
+        if (userAchievements.length === 0) {
+            achievementsList.innerHTML = `
+                <div class="achievement-item">
+                    <div class="achievement-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="achievement-content">
+                        <div class="achievement-title">Getting Started</div>
+                        <div class="achievement-desc">Complete your first action to earn achievements</div>
+                    </div>
+                </div>
+            `;
+            return;
+        }
+
+        achievementsList.innerHTML = userAchievements.map(achievement => `
+            <div class="achievement-item">
+                <div class="achievement-icon">
+                    <i class="fas ${achievement.icon}"></i>
+                </div>
+                <div class="achievement-content">
+                    <div class="achievement-title">${achievement.title}</div>
+                    <div class="achievement-desc">${achievement.description}</div>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    getUserAchievements() {
+        const achievementsKey = `userAchievements_${this.currentUser.email}`;
+        const savedAchievements = localStorage.getItem(achievementsKey);
+        
+        if (savedAchievements) {
+            return JSON.parse(savedAchievements);
+        }
+
+        // Generate default achievements based on user stats
+        const stats = this.getUserStats();
+        const defaultAchievements = [];
+
+        // Welcome achievement for all new users
+        defaultAchievements.push({
+            title: "Welcome to EduConnect!",
+            description: `Welcome ${this.currentUser.name}`,
+            icon: "fa-user-plus"
         });
 
+        if (stats.totalCourses >= 10) {
+            defaultAchievements.push({
+                title: "Course Explorer",
+                description: `Enrolled in ${stats.totalCourses} courses`,
+                icon: "fa-book"
+            });
+        }
 
+        if (stats.libraryResources >= 50) {
+            defaultAchievements.push({
+                title: "Knowledge Seeker",
+                description: `Accessed ${stats.libraryResources} resources`,
+                icon: "fa-book-open"
+            });
+        }
+
+        localStorage.setItem(achievementsKey, JSON.stringify(defaultAchievements));
+        return defaultAchievements;
+    }
+
+    addAchievement(title, description, icon) {
+        const achievementsKey = `userAchievements_${this.currentUser.email}`;
+        const achievements = this.getUserAchievements();
+        
+        // Check if achievement already exists
+        const exists = achievements.some(achievement => achievement.title === title);
+        if (exists) return;
+
+        const newAchievement = {
+            title: title,
+            description: description,
+            icon: icon,
+            earnedAt: new Date().toISOString()
+        };
+
+        achievements.unshift(newAchievement);
+        localStorage.setItem(achievementsKey, JSON.stringify(achievements));
+        this.loadAchievements();
+        
+        // Add activity for new achievement
+        this.addActivity(`Earned "${title}" achievement`, 'orange');
+    }
+
+    bindEvents() {
+        // Quick action buttons
+        document.getElementById('upload-material-btn').addEventListener('click', () => {
+            this.handleUploadMaterial();
+        });
+
+        document.getElementById('submit-feedback-btn').addEventListener('click', () => {
+            this.handleSubmitFeedback();
+        });
+
+        document.getElementById('browse-library-btn').addEventListener('click', () => {
+            this.handleBrowseLibrary();
+        });
+
+        document.getElementById('view-all-activity').addEventListener('click', () => {
+            this.handleViewAllActivity();
+        });
+
+        // Logout button
+        document.getElementById('logout-btn').addEventListener('click', () => {
+            this.handleLogout();
+        });
+
+        // Update stats periodically
+        setInterval(() => {
+            this.updateTimeStamps();
+        }, 60000); // Update every minute
+    }
+
+    handleUploadMaterial() {
+        // Check if CourseMaterialPage.html exists, otherwise show placeholder
+        if (this.pageExists('CourseMaterialPage.html')) {
+            window.location.href = 'CourseMaterialPage.html';
+        } else {
+            alert('Upload Material feature coming soon!');
+            this.addActivity('Attempted to upload material', 'orange');
+        }
+    }
+
+    handleSubmitFeedback() {
+        if (this.pageExists('feedback.html')) {
+            window.location.href = 'feedback.html';
+        } else {
+            alert('Feedback feature coming soon!');
+            this.addActivity('Attempted to submit feedback', 'blue');
+        }
+    }
+
+    handleBrowseLibrary() {
+        if (this.pageExists('elibrary.html')) {
+            window.location.href = 'elibrary.html';
+        } else {
+            alert('Library feature coming soon!');
+            this.addActivity('Browsed library', 'green');
+            this.updateStats('libraryResources', 1);
+        }
+    }
+
+    handleViewAllActivity() {
+        const activities = this.getUserActivities();
+        if (activities.length === 0) {
+            alert('No activities to show yet!');
+            return;
+        }
+
+        let activityText = 'Recent Activities:\n\n';
+        activities.forEach((activity, index) => {
+            activityText += `${index + 1}. ${activity.title} - ${activity.time}\n`;
+        });
+
+        alert(activityText);
+    }
+
+    handleLogout() {
+        if (confirm('Are you sure you want to logout?')) {
+            // Clear login session data
+            localStorage.removeItem('loggedIn');
+            localStorage.removeItem('name');
+            localStorage.removeItem('email');
+            localStorage.removeItem('role');
+            
+            // Add logout activity before clearing user data
+            this.addActivity('Logged out', 'gray');
+            
+            // Redirect to login page
+            window.location.href = 'accountsPage.html';
+        }
+    }
+
+    pageExists(url) {
+        // Simple check - in a real app, you might want to use fetch or similar
+        // For now, return false to show placeholder messages
+        return false;
+    }
+
+    updateStats(statName, increment = 1) {
+        const statsKey = `userStats_${this.currentUser.email}`;
+        const stats = this.getUserStats();
+        
+        if (stats[statName] !== undefined) {
+            stats[statName] += increment;
+            localStorage.setItem(statsKey, JSON.stringify(stats));
+            this.loadStatistics();
+        }
+    }
+
+    updateTimeStamps() {
+        // Update relative time stamps for activities
+        const activities = this.getUserActivities();
+        let updated = false;
+
+        activities.forEach(activity => {
+            if (activity.timestamp) {
+                const newTime = this.getRelativeTime(new Date(activity.timestamp));
+                if (newTime !== activity.time) {
+                    activity.time = newTime;
+                    updated = true;
+                }
+            }
+        });
+
+        if (updated) {
+            const activitiesKey = `userActivities_${this.currentUser.email}`;
+            localStorage.setItem(activitiesKey, JSON.stringify(activities));
+            this.loadRecentActivity();
+        }
+    }
+
+    getRelativeTime(date) {
+        const now = new Date();
+        const diffInSeconds = Math.floor((now - date) / 1000);
+        
+        if (diffInSeconds < 60) return 'Just now';
+        if (diffInSeconds < 3600) return `${Math.floor(diffInSeconds / 60)} minutes ago`;
+        if (diffInSeconds < 86400) return `${Math.floor(diffInSeconds / 3600)} hours ago`;
+        if (diffInSeconds < 604800) return `${Math.floor(diffInSeconds / 86400)} days ago`;
+        if (diffInSeconds < 2592000) return `${Math.floor(diffInSeconds / 604800)} weeks ago`;
+        
+        return `${Math.floor(diffInSeconds / 2592000)} months ago`;
+    }
+
+    // Utility method to simulate user interactions for demo
+    simulateUserActivity() {
+        const activities = [
+            { title: "Completed Data Structures Quiz", type: "green" },
+            { title: "Downloaded Algorithm Notes", type: "orange" },
+            { title: "Submitted Project Proposal", type: "blue" },
+            { title: "Joined Study Group", type: "purple" }
+        ];
+
+        const randomActivity = activities[Math.floor(Math.random() * activities.length)];
+        this.addActivity(randomActivity.title, randomActivity.type);
+        
+        // Randomly update stats
+        if (Math.random() > 0.5) {
+            this.updateStats('thisMonth', 1);
+        }
+    }
+}
+
+// Initialize dashboard when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    window.studentDashboard = new StudentDashboard();
+    
+    // For demo purposes, simulate some activity every 30 seconds
+    // Remove this in production
+    setInterval(() => {
+        if (window.studentDashboard.currentUser && Math.random() > 0.7) {
+            window.studentDashboard.simulateUserActivity();
+        }
+    }, 30000);
+});
+
+// Global functions for external use
+window.addStudentActivity = function(title, type = 'gray') {
+    if (window.studentDashboard) {
+        window.studentDashboard.addActivity(title, type);
+    }
+};
+
+window.addStudentAchievement = function(title, description, icon) {
+    if (window.studentDashboard) {
+        window.studentDashboard.addAchievement(title, description, icon);
+    }
+};
+
+window.updateStudentStats = function(statName, increment = 1) {
+    if (window.studentDashboard) {
+        window.studentDashboard.updateStats(statName, increment);
+    }
+};

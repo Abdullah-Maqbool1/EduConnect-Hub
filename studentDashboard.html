@@ -20,7 +20,7 @@
             <!-- Welcome Section -->
             <div class="welcome-section">
                 <h1 class="welcome-title">
-                    Welcome back, <span id="student--Name__Welcome">Areef!</span>
+                    Welcome back, <span id="student-name-welcome">Student!</span>
                     <span style="font-size: 1.5rem;">👋</span>
                 </h1>
                 <p class="welcome-subtitle">Here's what's happening with your academic journey today.</p>
@@ -35,7 +35,7 @@
                             <i class="fas fa-book"></i>
                         </div>
                     </div>
-                    <div class="stat-number">12</div>
+                    <div class="stat-number" id="total-courses">-</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-header">
@@ -44,7 +44,7 @@
                             <i class="fas fa-comment"></i>
                         </div>
                     </div>
-                    <div class="stat-number">3</div>
+                    <div class="stat-number" id="pending-feedback">-</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-header">
@@ -53,7 +53,7 @@
                             <i class="fas fa-book-open"></i>
                         </div>
                     </div>
-                    <div class="stat-number">45</div>
+                    <div class="stat-number" id="library-resources">-</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-header">
@@ -62,7 +62,7 @@
                             <i class="fas fa-chart-line"></i>
                         </div>
                     </div>
-                    <div class="stat-number">8</div>
+                    <div class="stat-number" id="this-month">-</div>
                 </div>
             </div>
 
@@ -77,50 +77,18 @@
                             <h2 class="section-title">Recent Activity</h2>
                         </div>
                         <div class="scrollable-content">
-                            <div class="activity-item">
-                                <div class="activity-dot orange"></div>
-                                <div class="activity-content">
-                                    <div class="activity-title">Data Structures Assignment</div>
-                                    <div class="activity-time">2 hours ago</div>
-                                </div>
-                            </div>
-                            <div class="activity-item">
-                                <div class="activity-dot gray"></div>
-                                <div class="activity-content">
-                                    <div class="activity-title">Feedback on Prof. Smith</div>
-                                    <div class="activity-time">1 day ago</div>
-                                </div>
-                            </div>
-                            <div class="activity-item">
-                                <div class="activity-dot green"></div>
-                                <div class="activity-content">
-                                    <div class="activity-title">Algorithm Notes.pdf</div>
-                                    <div class="activity-time">2 days ago</div>
-                                </div>
-                            </div>
-                            <div class="activity-item">
-                                <div class="activity-dot orange"></div>
-                                <div class="activity-content">
-                                    <div class="activity-title">Database Project</div>
-                                    <div class="activity-time">3 days ago</div>
-                                </div>
-                            </div>
-                            <div class="activity-item">
-                                <div class="activity-dot green"></div>
-                                <div class="activity-content">
-                                    <div class="activity-title">Calculus Midterm Results</div>
-                                    <div class="activity-time">5 days ago</div>
-                                </div>
-                            </div>
-                            <div class="activity-item">
-                                <div class="activity-dot gray"></div>
-                                <div class="activity-content">
-                                    <div class="activity-title">Physics Lab Report Submitted</div>
-                                    <div class="activity-time">1 week ago</div>
+                            <div id="activity-list">
+                                <!-- Activity items will be dynamically loaded here -->
+                                <div class="activity-item">
+                                    <div class="activity-dot gray"></div>
+                                    <div class="activity-content">
+                                        <div class="activity-title">Loading activities...</div>
+                                        <div class="activity-time">Please wait</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <button class="view-all-btn">View All Activity</button>
+                        <button class="view-all-btn" id="view-all-activity">View All Activity</button>
                     </div>
                 </div>
 
@@ -132,31 +100,16 @@
                             <i class="section-icon fas fa-trophy"></i>
                             <h2 class="section-title">Achievements</h2>
                         </div>
-                        <div class="achievement-item">
-                            <div class="achievement-icon">
-                                <i class="fas fa-trophy"></i>
-                            </div>
-                            <div class="achievement-content">
-                                <div class="achievement-title">Top Contributor</div>
-                                <div class="achievement-desc">Most uploads this month</div>
-                            </div>
-                        </div>
-                        <div class="achievement-item">
-                            <div class="achievement-icon">
-                                <i class="fas fa-book"></i>
-                            </div>
-                            <div class="achievement-content">
-                                <div class="achievement-title">Active Learner</div>
-                                <div class="achievement-desc">50+ downloads</div>
-                            </div>
-                        </div>
-                        <div class="achievement-item">
-                            <div class="achievement-icon">
-                                <i class="fas fa-hands-helping"></i>
-                            </div>
-                            <div class="achievement-content">
-                                <div class="achievement-title">Community Helper</div>
-                                <div class="achievement-desc">Helpful feedback</div>
+                        <div id="achievements-list">
+                            <!-- Achievements will be dynamically loaded here -->
+                            <div class="achievement-item">
+                                <div class="achievement-icon">
+                                    <i class="fas fa-trophy"></i>
+                                </div>
+                                <div class="achievement-content">
+                                    <div class="achievement-title">Loading achievements...</div>
+                                    <div class="achievement-desc">Please wait</div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -168,27 +121,36 @@
                             <h2 class="section-title">Quick Actions</h2>
                         </div>
                         <div class="quick-actions-container">
-                            <button class="quick-action-btn primary-btn">
+                            <button class="quick-action-btn primary-btn" id="upload-material-btn">
                                 <i class="fas fa-upload"></i>
-                                <a href="CourseMaterialPage.html">Upload Material</a>
+                                <span>Upload Material</span>
                             </button>
-                            <button class="quick-action-btn secondary-btn">
+                            <button class="quick-action-btn secondary-btn" id="submit-feedback-btn">
                                 <i class="fas fa-comment"></i>
-                                <a href="feedback.html">Submit Feedback</a>
+                                <span>Submit Feedback</span>
                             </button>
-                            <button class="quick-action-btn secondary-btn">
+                            <button class="quick-action-btn secondary-btn" id="browse-library-btn">
                                 <i class="fas fa-search"></i>
-                                <a href="elibrary.html">Browse Library</a>
+                                <span>Browse Library</span>
                             </button>
                         </div>
                     </div>
-
-
                 </div>
             </div>
         </main>
     </div>
 
+    <!-- Login Required Modal -->
+    <div id="login-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <h2>Login Required</h2>
+            <p>Please log in to access your dashboard.</p>
+            <button id="login-redirect-btn" class="quick-action-btn primary-btn">
+                <i class="fas fa-sign-in-alt"></i>
+                <span>Go to Login</span>
+            </button>
+        </div>
+    </div>
 
     <script src="js/studentDashboard.js"></script>
 </body>
