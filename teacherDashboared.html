@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Teacher Dashboard | EduConnectHub</title>
+  <link rel="stylesheet" href="assets/css/variables.css" />
+  <link rel="stylesheet" href="assets/css/teacherDashboard.css" />
+  <script defer src="../js/teacherDashboard.js"></script>
+</head>
+<body>
+  <div class="dashboard-container">
+    <section class="overview-panel">
+      <h2>Welcome, <span id="teacherName"></span> 👋</h2>
+      <div class="stats">
+        <div class="stat-box">
+          <h3>Courses</h3>
+          <p id="courseCount">0</p>
+        </div>
+        <div class="stat-box">
+          <h3>Materials</h3>
+          <p id="materialCount">0</p>
+        </div>
+        <div class="stat-box">
+          <h3>Feedback</h3>
+          <p id="feedbackCount">0</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="courses-section">
+      <div class="section-header">
+        <h2>My Courses</h2>
+        <button id="addCourseBtn" class="btn-primary">+ Add Course</button>
+      </div>
+      <div class="courses-container" id="teacherCourses">
+        <!-- Teacher's courses will appear here -->
+      </div>
+    </section>
+
+    <section class="uploads-section">
+      <h2>Recent Uploads</h2>
+      <ul id="recentUploads" class="uploads-list">
+        <!-- Recent uploads will be listed here -->
+      </ul>
+    </section>
+
+    <section class="feedback-section">
+      <h2>Student Feedback</h2>
+      <ul id="feedbackList" class="feedback-list">
+        <!-- Student feedback will be shown here -->
+      </ul>
+    </section>
+  </div>
+</body>
+</html>

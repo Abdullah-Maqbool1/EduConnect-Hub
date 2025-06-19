@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Courses - EduConnectHub</title>
+    <link rel="stylesheet" href="assets/css/variables.css">
+    <link rel="stylesheet" href="assets/css/courses.css">
+    <link rel="stylesheet" href="assets/css/studentHeaderStyle.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <div class="container">
+        <div class="page-header">
+            <h1>Available Courses</h1>
+            <p>Explore and enroll in courses that match your interests</p>
+        </div>
+
+        <!-- Search and Filter Section -->
+        <div class="search-filter-section">
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchInput" placeholder="Search courses by title...">
+            </div>
+            
+            <div class="filter-section">
+                <select id="subjectFilter">
+                    <option value="">All Subjects</option>
+                    <option value="Computer Science">Computer Science</option>
+                    <option value="Mathematics">Mathematics</option>
+                    <option value="Physics">Physics</option>
+                    <option value="Chemistry">Chemistry</option>
+                    <option value="Biology">Biology</option>
+                    <option value="English">English</option>
+                    <option value="History">History</option>
+                    <option value="Geography">Geography</option>
+                    <option value="Economics">Economics</option>
+                    <option value="Art">Art</option>
+                </select>
+            </div>
+
+            <!-- Add Course Button (Teacher Only) -->
+            <button id="addCourseBtn" class="add-course-btn" style="display: none;">
+                <i class="fas fa-plus"></i>
+                Add New Course
+            </button>
+        </div>
+
+        <!-- Courses Grid -->
+        <div class="courses-grid" id="coursesGrid">
+            <!-- Course cards will be dynamically inserted here -->
+        </div>
+
+        <!-- No Courses Message -->
+        <div class="no-courses" id="noCoursesMessage" style="display: none;">
+            <i class="fas fa-book-open"></i>
+            <h3>No Courses Available</h3>
+            <p>There are currently no courses matching your criteria.</p>
+        </div>
+    </div>
+
+    <!-- Add Course Modal (Teacher Only) -->
+    <div class="modal-overlay" id="addCourseModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>Add New Course</h2>
+                <button class="close-btn" id="closeModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <form id="addCourseForm" class="modal-content">
+                <div class="form-group">
+                    <label for="courseTitle">Course Title *</label>
+                    <input type="text" id="courseTitle" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="courseSubject">Subject *</label>
+                    <select id="courseSubject" required>
+                        <option value="">Select Subject</option>
+                        <option value="Computer Science">Computer Science</option>
+                        <option value="Mathematics">Mathematics</option>
+                        <option value="Physics">Physics</option>
+                        <option value="Chemistry">Chemistry</option>
+                        <option value="Biology">Biology</option>
+                        <option value="English">English</option>
+                        <option value="History">History</option>
+                        <option value="Geography">Geography</option>
+                        <option value="Economics">Economics</option>
+                        <option value="Art">Art</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="courseDescription">Description *</label>
+                    <textarea id="courseDescription" rows="4" required></textarea>
+                </div>
+                
+                <div class="modal-actions">
+                    <button type="button" class="cancel-btn" id="cancelBtn">Cancel</button>
+                    <button type="submit" class="submit-btn">Create Course</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/courses.js"></script>
+</body>
+</html>

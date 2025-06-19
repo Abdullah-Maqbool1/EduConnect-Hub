@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Materials - EduConnectHub</title>
+    <link rel="stylesheet" href="assets/css/course-material.css">
+    <link rel="stylesheet" href="assets/css/variables.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Back Button -->
+        <div class="navigation">
+            <button class="back-btn" id="backBtn">
+                <i class="fas fa-arrow-left"></i>
+                Back to Courses
+            </button>
+        </div>
+
+        <!-- Course Header -->
+        <div class="course-header" id="courseHeader">
+            <!-- Course info will be dynamically loaded -->
+        </div>
+
+        <!-- Search and Actions Section -->
+        <div class="search-actions-section">
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchInput" placeholder="Search materials...">
+            </div>
+
+            <div class="filter-section">
+                <select id="typeFilter">
+                    <option value="">All Types</option>
+                    <option value="pdf">PDF Documents</option>
+                    <option value="video">Videos</option>
+                    <option value="link">Web Links</option>
+                    <option value="document">Documents</option>
+                    <option value="presentation">Presentations</option>
+                </select>
+            </div>
+
+            <!-- Add Material Button (Teacher Only) -->
+            <button id="addMaterialBtn" class="add-material-btn" style="display: none;">
+                <i class="fas fa-plus"></i>
+                Add Material
+            </button>
+        </div>
+
+        <!-- Materials Grid -->
+        <div class="materials-section">
+            <div class="materials-grid" id="materialsGrid">
+                <!-- Material cards will be dynamically inserted here -->
+            </div>
+
+            <!-- No Materials Message -->
+            <div class="no-materials" id="noMaterialsMessage" style="display: none;">
+                <i class="fas fa-folder-open"></i>
+                <h3>No Materials Available</h3>
+                <p>There are currently no materials for this course.</p>
+                <p id="teacherHint" style="display: none;">As a teacher, you can add materials using the "Add Material" button above.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Material Modal (Teacher Only) -->
+    <div class="modal-overlay" id="addMaterialModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>Add New Material</h2>
+                <button class="close-btn" id="closeModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <form id="addMaterialForm" class="modal-content">
+                <div class="form-group">
+                    <label for="materialTitle">Material Title *</label>
+                    <input type="text" id="materialTitle" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="materialType">Material Type *</label>
+                    <select id="materialType" required>
+                        <option value="">Select Type</option>
+                        <option value="pdf">PDF Document</option>
+                        <option value="video">Video</option>
+                        <option value="link">Web Link</option>
+                        <option value="document">Document</option>
+                        <option value="presentation">Presentation</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="materialUrl">URL/Link *</label>
+                    <input type="url" id="materialUrl" placeholder="https://example.com/material" >
+                    <small class="form-hint">Provide a direct link to the material (Google Drive, YouTube, etc.)</small>
+                </div>
+                
+                <div class="form-group">
+                    <label for="materialDescription">Description</label>
+                    <textarea id="materialDescription" rows="3" placeholder="Brief description of the material..."></textarea>
+                </div>
+                
+                <div class="modal-actions">
+                    <button type="button" class="cancel-btn" id="cancelBtn">Cancel</button>
+                    <button type="submit" class="submit-btn">Add Material</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Course Not Found Message -->
+    <div class="course-not-found" id="courseNotFound" style="display: none;">
+        <div class="error-content">
+            <i class="fas fa-exclamation-triangle"></i>
+            <h2>Course Not Found</h2>
+            <p>The requested course could not be found or does not exist.</p>
+            <button class="back-btn" onclick="window.location.href='courses.html'">
+                <i class="fas fa-arrow-left"></i>
+                Back to Courses
+            </button>
+        </div>
+    </div>
+
+    <script src="js/course-material.js"></script>
+</body>
+</html>
