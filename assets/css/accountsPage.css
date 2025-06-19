@@ -1,4 +1,3 @@
-/* Base Styles */
 * {
     margin: 0;
     padding: 0;
@@ -6,8 +5,8 @@
 }
 
 html, body {
-    overflow-x: hidden; /* Prevent horizontal scrollbar */
     height: 100%;
+    overflow-x: hidden;
 }
 
 body {
@@ -15,26 +14,23 @@ body {
     background-color: var(--background-color);
     color: var(--text-color);
     line-height: 1.6;
-    overflow: hidden; /* Prevent any scrollbars */
 }
 
-/* Accounts Container */
 .accounts-container {
     display: flex;
     min-height: 100vh;
-    overflow: hidden; 
+    width: 100%;
 }
 
 .accounts__background {
     flex: 1;
     position: relative;
-    overflow: hidden; /* Hide any overflow */
 }
 
 .accounts__image {
     width: 100%;
     height: 100%;
-    margin: 0;
+    object-fit: cover;
     padding: var(--pd-3) var(--pd-4);
     border-radius: 29px;
 }
@@ -46,14 +42,11 @@ body {
     align-items: center;
     padding: var(--pd-5);
     position: relative;
-    overflow: hidden; /* Hide any overflow */
 }
 
-/* Form Styles - Fixed size transition */
 .accounts__form {
     width: 100%;
     max-width: 400px;
-    min-height: 500px; /* Fixed height to prevent size changes */
     background-color: var(--secondary-color);
     padding: var(--pd-1);
     border-radius: var(--border-radius);
@@ -122,7 +115,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: var(--mb-1);
-    flex-grow: 1; /* Make form content take available space */
+    flex-grow: 1;
 }
 
 .accounts__input-group {
@@ -135,7 +128,6 @@ body {
     font-size: var(--small-font-size);
     font-weight: var(--font-medium);
     color: var(--text-color);
-    margin-bottom: -2%;
 }
 
 .accounts__input {
@@ -149,8 +141,7 @@ body {
 .accounts__input:focus {
     outline: none;
     border-color: var(--primary-color);
-    transition: ease 0.2s;
-    box-shadow: 0 0 0 1px var(--primary-color); 
+    box-shadow: 0 0 0 1px var(--primary-color);
 }
 
 .accounts__options {
@@ -204,12 +195,11 @@ body {
 }
 
 .accounts__button--primary:hover {
-    background-color: #e08a19;
+    background-color: var(--hover-color);
     transform: translateY(-2px);
     box-shadow: var(--box-shadow);
 }
 
-/* Radio Group Styles */
 .accounts__radio-group {
     display: flex;
     gap: var(--mb-3);
@@ -231,4 +221,66 @@ body {
 .accounts__radio-label {
     font-size: var(--small-font-size);
     color: var(--text-color-light);
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    .accounts-container {
+        flex-direction: column;
+        width: 100%;
+        min-height: 100vh;
+    }
+
+    .accounts__background {
+        flex: none;
+        height: 30vh;
+        width: 100%;
+    }
+
+    .accounts__image {
+        padding: var(--pd-2);
+        border-radius: 0 0 29px 29px;
+    }
+
+    .accounts__forms {
+        flex: none;
+        width: 100%;
+        padding: var(--pd-3);
+        min-height: calc(100vh - 30vh);
+        align-items: flex-start;
+    }
+
+    .accounts__form {
+        max-width: 100%;
+        min-height: auto;
+        padding: var(--pd-2);
+        position: relative;
+        transform: none;
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .accounts__form.active {
+        display: flex;
+    }
+
+    .accounts__form:not(.active) {
+        display: none;
+    }
+
+    .accounts__header {
+        margin-bottom: var(--mb-3);
+    }
+
+    .accounts__title {
+        font-size: var(--normal-font-size);
+    }
+
+    .accounts__tabs {
+        margin-bottom: var(--mb-2);
+    }
+
+    .accounts__tab {
+        font-size: var(--normal-font-size);
+    }
 }
