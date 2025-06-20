@@ -14,7 +14,7 @@
      height: 80px;
      background-color: #ffffff;
      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-     position: sticky;
+     position: relative;
      top: 0;
      z-index: 1000;
  }

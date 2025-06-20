@@ -11,6 +11,12 @@
 
 <body>
 
+    <!-- Header -->
+     <header  id="header-in-Home">
+
+     </header>
+
+    </div>
     <main>
         <section class="hero__baanner">
             <div class="container hero__banner--style">
@@ -163,12 +169,24 @@
                     </div>
 
                     <div class="roles__sideimage">
-                        <img  src="assets/images/RolesSideImage.png" alt="Dashboard">
+                        <img src="assets/images/RolesSideImage.png" alt="Dashboard">
                     </div>
                 </div>
             </section>
         </div>
     </main>
+    <script>
+
+        // Load the header component
+        fetch('components/main-header.html')
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById('header-in-Home').innerHTML = html;
+            });
+
+
+    </script>
+
 </body>
 
 </html>

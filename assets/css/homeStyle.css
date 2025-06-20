@@ -17,7 +17,12 @@ body {
     padding-right: 20px;
 }
 
-
+#header-container {
+    position: static;
+    top: 0;
+    left: 0;
+    z-index: 10;
+}
 
 /* Hero Section */
 .hero__baanner {
@@ -191,7 +196,7 @@ body {
     align-items: center;
 }
 
-.roles__list{
+.roles__list {
     position: relative;
     padding-left: 20px;
 }
@@ -222,7 +227,7 @@ body {
     color: var(--text-color-paragraph);
 }
 
-.roles__sideimage img{
+.roles__sideimage img {
     width: 450px;
 }
 
@@ -234,7 +239,7 @@ body {
     .hero__banner--style {
         gap: 80px;
     }
-    
+
     .feature__flexbox {
         gap: 60px;
     }
@@ -247,15 +252,15 @@ body {
         padding-left: 15px;
         padding-right: 15px;
     }
-    
+
     .hero__banner--style {
         gap: 60px;
     }
-    
+
     .feature__flexbox {
         gap: 40px;
     }
-    
+
     .roles__sideimage img {
         width: 400px;
     }
@@ -268,26 +273,26 @@ body {
         gap: 40px;
         text-align: center;
     }
-    
+
     .heroBanner__description {
         width: 90%;
     }
-    
+
     .feature__flexbox {
         flex-wrap: wrap;
         gap: 30px;
     }
-    
+
     .feature__card {
         flex: 1;
         min-width: 280px;
     }
-    
+
     .roles__sections {
         flex-direction: column;
         gap: 40px;
     }
-    
+
     .roles__sideimage img {
         width: 350px;
     }
@@ -299,40 +304,40 @@ body {
         padding-left: 10px;
         padding-right: 10px;
     }
-    
+
     .hero__banner--style {
         padding: var(--pd-4) 0;
         gap: 30px;
     }
-    
+
     .hero__buttons {
         flex-direction: column;
         align-items: center;
         gap: 10px;
     }
-    
+
     .btn {
         width: 200px;
     }
-    
+
     .features {
         gap: 50px;
     }
-    
+
     .feature__flexbox {
         flex-direction: column;
         gap: 20px;
     }
-    
+
     .feature__card {
         width: 100%;
         max-width: 350px;
     }
-    
+
     .roles {
         gap: 50px;
     }
-    
+
     .roles__sideimage img {
         width: 300px;
     }
@@ -343,28 +348,28 @@ body {
     .heroBanner__description {
         width: 100%;
     }
-    
+
     .hero__buttons {
         width: 100%;
     }
-    
+
     .btn {
         width: 100%;
         max-width: 250px;
     }
-    
+
     .feature__card {
         max-width: 300px;
         padding: var(--pd-3);
     }
-    
+
     .feature__card .feature__card__icon {
         width: 60px;
         height: 60px;
         bottom: 50px;
         margin-bottom: -25px;
     }
-    
+
     .roles__sideimage img {
         width: 250px;
     }
@@ -376,27 +381,27 @@ body {
         padding-left: 8px;
         padding-right: 8px;
     }
-    
+
     .hero__banner--style {
         padding: var(--pd-3) 0;
     }
-    
+
     .feature__card {
         max-width: 280px;
         padding: var(--pd-2);
     }
-    
+
     .feature__card .feature__card__icon {
         width: 50px;
         height: 50px;
         bottom: 40px;
         margin-bottom: -20px;
     }
-    
+
     .roles__sideimage img {
         width: 200px;
     }
-    
+
     .btn {
         padding: 8px 20px;
         font-size: calc(var(--small-font-size) - 1px);
@@ -408,11 +413,11 @@ body {
     .feature__card {
         max-width: 260px;
     }
-    
+
     .roles__sideimage img {
         width: 180px;
     }
-    
+
     .hero__banner--style {
         gap: 20px;
     }
