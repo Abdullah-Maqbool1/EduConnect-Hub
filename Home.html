@@ -12,9 +12,9 @@
 <body>
 
     <!-- Header -->
-     <header  id="header-in-Home">
+    <header id="header-in-Home">
 
-     </header>
+    </header>
 
     </div>
     <main>
@@ -182,6 +182,11 @@
             .then(response => response.text())
             .then(html => {
                 document.getElementById('header-in-Home').innerHTML = html;
+
+                // Load mobile menu script AFTER header is injected
+                const script = document.createElement('script');
+                script.src = 'js/mobile-menu.js';
+                document.body.appendChild(script);
             });
 
 
