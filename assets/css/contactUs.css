@@ -3,7 +3,11 @@
   font-family: var(--body-font);
   color: var(--text-color-light);
   background-color: var(--background-color);
-  padding: var(--pd-4);
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 /* Introduction Section */
