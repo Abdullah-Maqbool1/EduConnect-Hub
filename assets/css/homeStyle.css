@@ -94,7 +94,9 @@ body {
 
 .hero-button__2:hover {
     background-color: var(--primary-color);
-    color: white;
+}
+.hero-button__2:hover a{
+    color: white !important;
 }
 
 

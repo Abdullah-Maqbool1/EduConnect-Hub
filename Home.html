@@ -29,10 +29,11 @@
                     </p>
                     <div class="hero__buttons">
                         <button class="hero-button__1 btn">
-                            Get Started
+                            <a style="text-decoration: none; color: white;" href="accountsPage.html">Get Started</a>
                         </button>
                         <button class="hero-button__2 btn">
-                            Visit Library
+                            <a style="text-decoration: none; color: #353535;" href="elibrary.html">Visit Library</a>
+
                         </button>
                     </div>
                 </div>
@@ -175,6 +176,9 @@
             </section>
         </div>
     </main>
+    <footer id="footer-container">
+
+    </footer>
     <script>
 
         // Load the header component
@@ -189,7 +193,12 @@
                 document.body.appendChild(script);
             });
 
-
+        // Load the header component
+        fetch('components/footer.html')
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById('footer-container').innerHTML = html;
+            });
     </script>
 
 </body>
