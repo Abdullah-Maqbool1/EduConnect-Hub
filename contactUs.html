@@ -9,6 +9,12 @@
   <link rel="stylesheet" href="assets\css\contactUs.css">
 </head>
 <body>
+    <!-- Header -->
+  <header id="header-in-contact">
+
+  </header>
+
+
   <main class="contact-container">
     <!-- Introduction Section -->
     <section class="intro-section">
@@ -77,6 +83,39 @@
       </div>
     </section>
   </main>
+
+  <footer id="footer-container">
+
+  </footer>
+
+    <script>
+    // Load the header component
+    fetch('components/main-header.html')
+      .then(response => response.text())
+      .then(html => {
+        document.getElementById('header-in-contact').innerHTML = html;
+
+        // Load mobile menu script AFTER header is injected
+        const script = document.createElement('script');
+        script.src = 'js/mobile-menu.js';
+        script.onload = function () {
+          // Initialize navigation after script loads
+          setTimeout(() => {
+            if (window.initializeNavigation) {
+              window.initializeNavigation();
+            }
+          }, 50);
+        };
+        document.body.appendChild(script);
+      });
+
+    // Load the Footer component
+    fetch('components/footer.html')
+      .then(response => response.text())
+      .then(html => {
+        document.getElementById('footer-container').innerHTML = html;
+      });
+  </script>
   <script src="js/contactUs.js"></script>
 </body>
 </html>

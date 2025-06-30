@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,14 +9,23 @@
   <link rel="stylesheet" href="assets/css/variables.css">
   <link rel="stylesheet" href="assets/css/aboutPage.css">
 </head>
+
 <body>
+
+  <!-- Header -->
+  <header id="header-in-about">
+
+  </header>
+
+
   <main class="about-container">
     <!-- Introduction Section -->
     <section class="intro-section">
       <div class="intro-content">
         <h1>Welcome to EduConnectHub</h1>
         <p class="slogan">"Connecting minds. Empowering education. Building a future together."</p>
-        <p class="intro-text">EduConnectHub is a vibrant community platform designed to bring students and teachers together for collaborative learning, resource sharing, and real-time feedback.</p>
+        <p class="intro-text">EduConnectHub is a vibrant community platform designed to bring students and teachers
+          together for collaborative learning, resource sharing, and real-time feedback.</p>
         <a href="#join-us" class="learn-more-btn">Learn More</a>
       </div>
     </section>
@@ -85,6 +95,42 @@
       <a href="accountsPage.html" class="join-btn">Get Involved</a>
     </section>
   </main>
+
+  <footer id="footer-container">
+
+  </footer>
+
+
+  <script>
+    // Load the header component
+    fetch('components/main-header.html')
+      .then(response => response.text())
+      .then(html => {
+        document.getElementById('header-in-about').innerHTML = html;
+
+        // Load mobile menu script AFTER header is injected
+        const script = document.createElement('script');
+        script.src = 'js/mobile-menu.js';
+        script.onload = function () {
+          // Initialize navigation after script loads
+          setTimeout(() => {
+            if (window.initializeNavigation) {
+              window.initializeNavigation();
+            }
+          }, 50);
+        };
+        document.body.appendChild(script);
+      });
+
+    // Load the Footer component
+    fetch('components/footer.html')
+      .then(response => response.text())
+      .then(html => {
+        document.getElementById('footer-container').innerHTML = html;
+      });
+  </script>
+
   <script src="js/aboutPage.js"></script>
 </body>
+
 </html>

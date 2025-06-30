@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +9,13 @@
     <link rel="stylesheet" href="assets/css/variables.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
+
 <body>
+
+    <!-- Header -->
+    <header id="header-in-course-material">
+
+    </header>
     <div class="container">
         <!-- Back Button -->
         <div class="navigation">
@@ -59,7 +66,8 @@
                 <i class="fas fa-folder-open"></i>
                 <h3>No Materials Available</h3>
                 <p>There are currently no materials for this course.</p>
-                <p id="teacherHint" style="display: none;">As a teacher, you can add materials using the "Add Material" button above.</p>
+                <p id="teacherHint" style="display: none;">As a teacher, you can add materials using the "Add Material"
+                    button above.</p>
             </div>
         </div>
     </div>
@@ -73,13 +81,13 @@
                     <i class="fas fa-times"></i>
                 </button>
             </div>
-            
+
             <form id="addMaterialForm" class="modal-content">
                 <div class="form-group">
                     <label for="materialTitle">Material Title *</label>
                     <input type="text" id="materialTitle" required>
                 </div>
-                
+
                 <div class="form-group">
                     <label for="materialType">Material Type *</label>
                     <select id="materialType" required>
@@ -91,18 +99,19 @@
                         <option value="presentation">Presentation</option>
                     </select>
                 </div>
-                
+
                 <div class="form-group">
                     <label for="materialUrl">URL/Link *</label>
-                    <input type="url" id="materialUrl" placeholder="https://example.com/material" >
+                    <input type="url" id="materialUrl" placeholder="https://example.com/material">
                     <small class="form-hint">Provide a direct link to the material (Google Drive, YouTube, etc.)</small>
                 </div>
-                
+
                 <div class="form-group">
                     <label for="materialDescription">Description</label>
-                    <textarea id="materialDescription" rows="3" placeholder="Brief description of the material..."></textarea>
+                    <textarea id="materialDescription" rows="3"
+                        placeholder="Brief description of the material..."></textarea>
                 </div>
-                
+
                 <div class="modal-actions">
                     <button type="button" class="cancel-btn" id="cancelBtn">Cancel</button>
                     <button type="submit" class="submit-btn">Add Material</button>
@@ -123,7 +132,40 @@
             </button>
         </div>
     </div>
+    <footer id="footer-container">
+
+    </footer>
 
     <script src="js/course-material.js"></script>
+
+     <script>
+        // Load the header component
+        fetch('components/header-student.html')
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById('header-in-course-material').innerHTML = html; // Adjust ID as needed
+
+                // Load mobile menu script AFTER header is injected
+                const script = document.createElement('script');
+                script.src = 'js/mobile-menu.js';
+                script.onload = function () {
+                    // Initialize navigation after script loads
+                    setTimeout(() => {
+                        if (window.initializeNavigation) {
+                            window.initializeNavigation();
+                        }
+                    }, 50);
+                };
+                document.body.appendChild(script);
+            });
+
+        // Load the Footer component
+        fetch('components/footer.html')
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById('footer-container').innerHTML = html;
+            });
+    </script>
 </body>
+
 </html>

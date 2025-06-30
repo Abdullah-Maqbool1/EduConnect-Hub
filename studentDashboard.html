@@ -16,7 +16,7 @@
 <body>
 
     <div id="header-in-student-dashboard">
-        
+
     </div>
 
     <div class="dashboard-container">
@@ -157,23 +157,37 @@
             </button>
         </div>
     </div>
+    <script src="js/studentDashboard.js"></script>
+
 
     <script>
-
         // Load the header component
         fetch('components/header-student.html')
             .then(response => response.text())
             .then(html => {
-                document.getElementById('header-in-student-dashboard').innerHTML = html;
+                document.getElementById('header-in-student-dashboard').innerHTML = html; // Adjust ID as needed
 
                 // Load mobile menu script AFTER header is injected
                 const script = document.createElement('script');
                 script.src = 'js/mobile-menu.js';
+                script.onload = function () {
+                    // Initialize navigation after script loads
+                    setTimeout(() => {
+                        if (window.initializeNavigation) {
+                            window.initializeNavigation();
+                        }
+                    }, 50);
+                };
                 document.body.appendChild(script);
             });
-    </script>
 
-    <script src="js/studentDashboard.js"></script>
+        // Load the Footer component
+        fetch('components/footer.html')
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById('footer-container').innerHTML = html;
+            });
+    </script>
 </body>
 
 
