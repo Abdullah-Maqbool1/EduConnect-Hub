@@ -318,32 +318,35 @@ class StudentDashboard {
     }
 
     handleUploadMaterial() {
+         window.location.href = 'CourseMaterialPage.html';
         // Check if CourseMaterialPage.html exists, otherwise show placeholder
-        if (this.pageExists('CourseMaterialPage.html')) {
-            window.location.href = 'CourseMaterialPage.html';
-        } else {
-            alert('Upload Material feature coming soon!');
-            this.addActivity('Attempted to upload material', 'orange');
-        }
+        // if (this.pageExists('CourseMaterialPage.html')) {
+           
+        // } else {
+        //     alert('Upload Material feature coming soon!');
+        //     this.addActivity('Attempted to upload material', 'orange');
+        // }
     }
 
     handleSubmitFeedback() {
-        if (this.pageExists('feedback.html')) {
-            window.location.href = 'feedback.html';
-        } else {
-            alert('Feedback feature coming soon!');
-            this.addActivity('Attempted to submit feedback', 'blue');
-        }
+         window.location.href = 'feedback.html';
+        // if (this.pageExists('feedback.html')) {
+           
+        // } else {
+        //     alert('Feedback feature coming soon!');
+        //     this.addActivity('Attempted to submit feedback', 'blue');
+        // }
     }
 
     handleBrowseLibrary() {
-        if (this.pageExists('elibrary.html')) {
-            window.location.href = 'elibrary.html';
-        } else {
-            alert('Library feature coming soon!');
-            this.addActivity('Browsed library', 'green');
-            this.updateStats('libraryResources', 1);
-        }
+        window.location.href = 'elibrary.html';
+        // if (this.pageExists('elibrary.html')) {
+            
+        // } else {
+        //     alert('Library feature coming soon!');
+        //     this.addActivity('Browsed library', 'green');
+        //     this.updateStats('libraryResources', 1);
+        // }
     }
 
     handleViewAllActivity() {
