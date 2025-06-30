@@ -1,16 +1,21 @@
 document.addEventListener("DOMContentLoaded", () => {
   const name = localStorage.getItem("name") || "Teacher";
+  console.log(name);
   const role = localStorage.getItem("role");
+  console.log(role);
   if (role !== "teacher") window.location.href = "../Home.html";
 
   document.getElementById("teacherName").textContent = name;
 
   const courses = JSON.parse(localStorage.getItem("courses")) || [];
   const materials = JSON.parse(localStorage.getItem("materials")) || [];
+  console.log("mm",materials);
   const feedbacks = JSON.parse(localStorage.getItem("feedbacks")) || [];
 
   const myCourses = courses.filter(c => c.teacher === name);
+  console.log(myCourses);
   const myMaterials = materials.filter(m => m.addedBy === name);
+  console.log(myMaterials);
 
   document.getElementById("courseCount").textContent = myCourses.length;
   document.getElementById("materialCount").textContent = myMaterials.length;
