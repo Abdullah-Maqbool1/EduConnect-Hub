@@ -38,7 +38,7 @@ function populateTeam() {
   const teamGrid = document.getElementById('team-grid');
   teamGrid.innerHTML = teamData.map(member => `
     <div class="team-card">
-      <img src="${member.image}" alt="${member.name}">
+      <img loading="lazy" src="${member.image}" alt="${member.name}">
       <h3>${member.name}</h3>
       <p class="role">${member.role}</p>
       <p class="bio">${member.bio}</p>
