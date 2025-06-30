@@ -1,45 +1,34 @@
 const teamData = [
   {
-    name: "Jane Smith",
-    role: "Co-Founder",
-    image: "assets/images/aboutPageProfile.jpg",
-    bio: "Passionate about education, Jane leads the vision for EduConnectHub.",
-    social: {
-      github: "https://github.com/",
-      linkedin: "https://linkedin.com/",
-      instagram: "https://instagram.com/"
-    }
-  },
-  {
-    name: "Michael Lee",
+    name: "Areef ur Rehman",
     role: "Lead Developer",
-    image: "assets/images/aboutPageProfile.jpg",
+    image: "assets/images/areef_profile_pic.jpg",
     bio: "A student coder building innovative tools for learning.",
     social: {
-      github: "https://github.com/",
+      github: "https://github.com/areefurrahman",
       linkedin: "https://linkedin.com/",
       instagram: "https://instagram.com/"
     }
   },
   {
-    name: "Sarah Davis",
+    name: "Muzaffar Ali",
     role: "Mentor",
-    image: "assets/images/aboutPageProfile.jpg",
+    image: "assets/images/muzaffar_profile_pic.jpg",
     bio: "An experienced teacher fostering collaboration in classrooms.",
     social: {
-      github: "https://github.com/",
+      github: "https://github.com/muz1058",
       linkedin: "https://linkedin.com/in/",
       instagram: "https://instagram.com/"
     }
   },
   {
-    name: "Alex Brown",
+    name: "Abdullah Maqbool",
     role: "Student Advocate",
-    image: "assets/images/aboutPageProfile.jpg",
+    image: "assets/images/abdullah_profile_pic.jpg",
     bio: "Representing student voices to shape the platform.",
     social: {
-      github: "https://github.com/",
-      linkedin: "https://linkedin.com/in",
+      github: "https://github.com/Abdullah-Maqbool1",
+      linkedin: "https://pk.linkedin.com/in/areef-ur-rahman",
       instagram: "https://instagram.com"
     }
   }
