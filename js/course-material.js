@@ -1,12 +1,16 @@
 // Course Material Page JavaScript
 document.addEventListener('DOMContentLoaded', function() {
+    console.log("welcome............");
     // Get course ID from URL parameters
     const urlParams = new URLSearchParams(window.location.search);
     const courseId = urlParams.get('courseId');
-    
-    // Check if user is logged in and get role
-    const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+
+    const currentUser =  localStorage.getItem('userName') || localStorage.getItem('name')
+    console.log(currentUser);
+   
+
     const userRole = currentUser.role || localStorage.getItem('role');
+    console.log(userRole);
     
     // DOM Elements
     const courseHeader = document.getElementById('courseHeader');
@@ -226,7 +230,7 @@ document.addEventListener('DOMContentLoaded', function() {
             type: document.getElementById('materialType').value,
             url: document.getElementById('materialUrl').value.trim(),
             description: document.getElementById('materialDescription').value.trim(),
-            addedBy: currentUser.name || 'Teacher',
+            addedBy: currentUser,
             addedOn: new Date().toISOString()
         };
         
@@ -254,6 +258,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     function saveMaterial(material) {
+        console.log(material);
         const materials = JSON.parse(localStorage.getItem('materials') || '[]');
         materials.push(material);
         localStorage.setItem('materials', JSON.stringify(materials));
@@ -367,4 +372,5 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Initialize sample data (comment out in production)
     initSampleData();
+    
 });
