@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +9,14 @@
     <link rel="stylesheet" href="assets/css/feedbackStyle.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
+
 <body>
+
+    <!-- Header -->
+    <header id="header-in-feedback">
+
+    </header>
+
     <div class="container">
         <!-- Page Header -->
         <div class="page-header">
@@ -53,11 +61,11 @@
                 <div class="stat-number pending">2</div>
                 <div class="stat-label">Pending</div>
             </div>
-              <div class="stat-card">
+            <div class="stat-card">
                 <div class="stat-number pending">4.6</div>
                 <div class="stat-label">Avg Ratting</div>
             </div>
-            
+
         </div>
 
         <!-- Feedback List -->
@@ -234,6 +242,72 @@
         </div>
     </div>
 
- <script src="js/feedback.js"></script>
+    <footer id="footer-container">
+
+    </footer>
+    <script src="js/feedback.js"></script>
+
+    <script>
+
+        const loggedIn = localStorage.getItem('loggedIn');
+        const getUserRole = localStorage.getItem('role');
+
+
+        if (getUserRole === 'student' && loggedIn === 'true') {
+            // Load the header component
+            fetch('components/header-student.html')
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('header-in-feedback').innerHTML = html; // Adjust ID as needed
+
+                    // Load mobile menu script AFTER header is injected
+                    const script = document.createElement('script');
+                    script.src = 'js/mobile-menu.js';
+                    script.onload = function () {
+                        // Initialize navigation after script loads
+                        setTimeout(() => {
+                            if (window.initializeNavigation) {
+                                window.initializeNavigation();
+                            }
+                        }, 50);
+                    };
+                    document.body.appendChild(script);
+                });
+        }
+
+        else if (getUserRole === 'teacher' && loggedIn === 'true') {
+            // Load the header component
+            fetch('components/header-teacher.html')
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('header-in-feedback').innerHTML = html; // Adjust ID as needed
+
+                    // Load mobile menu script AFTER header is injected
+                    const script = document.createElement('script');
+                    script.src = 'js/mobile-menu.js';
+                    script.onload = function () {
+                        // Initialize navigation after script loads
+                        setTimeout(() => {
+                            if (window.initializeNavigation) {
+                                window.initializeNavigation();
+                            }
+                        }, 50);
+                    };
+                    document.body.appendChild(script);
+                });
+
+        }
+
+
+
+
+        // Load the Footer component
+        fetch('components/footer.html')
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById('footer-container').innerHTML = html;
+            });
+    </script>
 </body>
+
 </html>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,14 +9,20 @@
     <link rel="stylesheet" href="assets/css/elibrary.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
+
 <body>
+
+    <!-- Header -->
+    <header id="header-in-elibrary">
+
+    </header>
     <div class="elibrary-container">
         <!-- Analytics Sidebar -->
         <aside class="analytics-sidebar">
             <div class="sidebar-header">
                 <h2><i class="fas fa-chart-bar"></i> Analytics</h2>
             </div>
-            
+
             <div class="analytics-cards">
                 <div class="analytics-card">
                     <div class="card-icon">
@@ -95,7 +102,7 @@
                         <input type="text" id="search-input" placeholder="Search resources by title...">
                     </div>
                 </div>
-                
+
                 <div class="filter-section">
                     <select id="subject-filter">
                         <option value="">All Subjects</option>
@@ -107,7 +114,7 @@
                         <option value="English">English</option>
                         <option value="History">History</option>
                     </select>
-                    
+
                     <select id="type-filter">
                         <option value="">All Types</option>
                         <option value="PDF">PDF</option>
@@ -116,10 +123,10 @@
                     </select>
                 </div>
                 <div class="upload-button-section">
-    <button class="btn btn-primary" id="open-upload-modal">
-        <i class="fas fa-upload"></i> Upload Resource
-    </button>
-</div>
+                    <button class="btn btn-primary" id="open-upload-modal">
+                        <i class="fas fa-upload"></i> Upload Resource
+                    </button>
+                </div>
             </div>
 
             <!-- Teacher Upload Panel -->
@@ -204,7 +211,7 @@
                     <div class="resources-grid" id="resources-grid">
                         <!-- Resources will be dynamically populated here -->
                     </div>
-                    
+
                     <div class="empty-state" id="empty-state">
                         <div class="empty-icon">
                             <i class="fas fa-book-open"></i>
@@ -212,7 +219,7 @@
                         <h3>No Resources Found</h3>
                         <p>No resources match your current search criteria.</p>
                     </div>
-                </div> 
+                </div>
             </div>
         </main>
     </div>
@@ -224,180 +231,269 @@
             <span class="toast-message"></span>
         </div>
     </div>
-    
+
     <!-- File Upload Modal -->
-<div class="modal-overlay" id="upload-modal-overlay">
-    <div class="upload-modal" id="upload-modal">
-        <div class="modal-header">
-            <h3><i class="fas fa-cloud-upload-alt"></i> Upload New Resource</h3>
-            <button class="modal-close-btn" id="close-upload-modal">
-                <i class="fas fa-times"></i>
-            </button>
-        </div>
-        
-        <div class="modal-body">
-            <form class="upload-modal-form" id="upload-modal-form" enctype="multipart/form-data">
-                <!-- File Upload Section -->
-                <div class="file-upload-section">
-                    <div class="file-drop-zone" id="file-drop-zone">
-                        <div class="drop-zone-content">
-                            <i class="fas fa-cloud-upload-alt drop-icon"></i>
-                            <h4>Drag & Drop your file here</h4>
-                            <p>or click to browse files</p>
-                            <input type="file" id="file-input" accept=".pdf,.doc,.docx,.ppt,.pptx,.mp4,.avi,.mov,.mkv,.jpg,.jpeg,.png,.gif" hidden>
-                        </div>
-                        <div class="file-preview" id="file-preview" style="display: none;">
-                            <div class="file-info">
-                                <div class="file-icon">
-                                    <i class="fas fa-file"></i>
-                                </div>
-                                <div class="file-details">
-                                    <div class="file-name" id="selected-file-name"></div>
-                                    <div class="file-size" id="selected-file-size"></div>
-                                </div>
-                                <button type="button" class="remove-file-btn" id="remove-file-btn">
-                                    <i class="fas fa-trash"></i>
-                                </button>
+    <div class="modal-overlay" id="upload-modal-overlay">
+        <div class="upload-modal" id="upload-modal">
+            <div class="modal-header">
+                <h3><i class="fas fa-cloud-upload-alt"></i> Upload New Resource</h3>
+                <button class="modal-close-btn" id="close-upload-modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <form class="upload-modal-form" id="upload-modal-form" enctype="multipart/form-data">
+                    <!-- File Upload Section -->
+                    <div class="file-upload-section">
+                        <div class="file-drop-zone" id="file-drop-zone">
+                            <div class="drop-zone-content">
+                                <i class="fas fa-cloud-upload-alt drop-icon"></i>
+                                <h4>Drag & Drop your file here</h4>
+                                <p>or click to browse files</p>
+                                <input type="file" id="file-input"
+                                    accept=".pdf,.doc,.docx,.ppt,.pptx,.mp4,.avi,.mov,.mkv,.jpg,.jpeg,.png,.gif" hidden>
                             </div>
-                            <div class="upload-progress" id="upload-progress" style="display: none;">
-                                <div class="progress-bar">
-                                    <div class="progress-fill" id="progress-fill"></div>
+                            <div class="file-preview" id="file-preview" style="display: none;">
+                                <div class="file-info">
+                                    <div class="file-icon">
+                                        <i class="fas fa-file"></i>
+                                    </div>
+                                    <div class="file-details">
+                                        <div class="file-name" id="selected-file-name"></div>
+                                        <div class="file-size" id="selected-file-size"></div>
+                                    </div>
+                                    <button type="button" class="remove-file-btn" id="remove-file-btn">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
                                 </div>
-                                <div class="progress-text" id="progress-text">0%</div>
+                                <div class="upload-progress" id="upload-progress" style="display: none;">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" id="progress-fill"></div>
+                                    </div>
+                                    <div class="progress-text" id="progress-text">0%</div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- Resource Details Form -->
-                <div class="form-section">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="modal-resource-title">Resource Title *</label>
-                            <input type="text" id="modal-resource-title" placeholder="Enter resource title" required>
+                    <!-- Resource Details Form -->
+                    <div class="form-section">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="modal-resource-title">Resource Title *</label>
+                                <input type="text" id="modal-resource-title" placeholder="Enter resource title"
+                                    required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="modal-resource-type">Resource Type *</label>
+                                <select id="modal-resource-type" required>
+                                    <option value="">Auto-detect from file</option>
+                                    <option value="PDF">PDF Document</option>
+                                    <option value="Video">Video</option>
+                                    <option value="Image">Image</option>
+                                    <option value="Document">Document</option>
+                                    <option value="Presentation">Presentation</option>
+                                </select>
+                            </div>
                         </div>
-                        
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="modal-resource-subject">Subject *</label>
+                                <select id="modal-resource-subject" required>
+                                    <option value="">Select Subject</option>
+                                    <option value="Computer Science">Computer Science</option>
+                                    <option value="Mathematics">Mathematics</option>
+                                    <option value="Physics">Physics</option>
+                                    <option value="Chemistry">Chemistry</option>
+                                    <option value="Biology">Biology</option>
+                                    <option value="English">English</option>
+                                    <option value="History">History</option>
+                                    <option value="Geography">Geography</option>
+                                    <option value="Economics">Economics</option>
+                                    <option value="Art">Art</option>
+                                    <option value="Music">Music</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="modal-resource-category">Category</label>
+                                <select id="modal-resource-category">
+                                    <option value="">Select Category</option>
+                                    <option value="Lecture Notes">Lecture Notes</option>
+                                    <option value="Assignment">Assignment</option>
+                                    <option value="Tutorial">Tutorial</option>
+                                    <option value="Reference Material">Reference Material</option>
+                                    <option value="Lab Manual">Lab Manual</option>
+                                    <option value="Past Papers">Past Papers</option>
+                                    <option value="Study Guide">Study Guide</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="modal-resource-level">Academic Level</label>
+                                <select id="modal-resource-level">
+                                    <option value="">Select Level</option>
+                                    <option value="Beginner">Beginner</option>
+                                    <option value="Intermediate">Intermediate</option>
+                                    <option value="Advanced">Advanced</option>
+                                    <option value="Graduate">Graduate</option>
+                                    <option value="Undergraduate">Undergraduate</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="modal-resource-language">Language</label>
+                                <select id="modal-resource-language">
+                                    <option value="English">English</option>
+                                    <option value="Urdu">Urdu</option>
+                                    <option value="Arabic">Arabic</option>
+                                    <option value="French">French</option>
+                                    <option value="Spanish">Spanish</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+
                         <div class="form-group">
-                            <label for="modal-resource-type">Resource Type *</label>
-                            <select id="modal-resource-type" required>
-                                <option value="">Auto-detect from file</option>
-                                <option value="PDF">PDF Document</option>
-                                <option value="Video">Video</option>
-                                <option value="Image">Image</option>
-                                <option value="Document">Document</option>
-                                <option value="Presentation">Presentation</option>
-                            </select>
+                            <label for="modal-resource-description">Description</label>
+                            <textarea id="modal-resource-description" rows="4"
+                                placeholder="Provide a detailed description of the resource content, learning objectives, and any prerequisites..."></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="modal-resource-tags">Tags (comma-separated)</label>
+                            <input type="text" id="modal-resource-tags"
+                                placeholder="e.g., algorithms, data structures, programming, basics">
+                            <small class="form-help">Add relevant tags to help others find this resource</small>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group checkbox-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="modal-resource-featured">
+                                    <span class="checkbox-custom"></span>
+                                    Mark as Featured Resource
+                                </label>
+                            </div>
+
+                            <div class="form-group checkbox-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="modal-resource-downloadable" checked>
+                                    <span class="checkbox-custom"></span>
+                                    Allow Download
+                                </label>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="modal-resource-subject">Subject *</label>
-                            <select id="modal-resource-subject" required>
-                                <option value="">Select Subject</option>
-                                <option value="Computer Science">Computer Science</option>
-                                <option value="Mathematics">Mathematics</option>
-                                <option value="Physics">Physics</option>
-                                <option value="Chemistry">Chemistry</option>
-                                <option value="Biology">Biology</option>
-                                <option value="English">English</option>
-                                <option value="History">History</option>
-                                <option value="Geography">Geography</option>
-                                <option value="Economics">Economics</option>
-                                <option value="Art">Art</option>
-                                <option value="Music">Music</option>
-                                <option value="Other">Other</option>
-                            </select>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="modal-resource-category">Category</label>
-                            <select id="modal-resource-category">
-                                <option value="">Select Category</option>
-                                <option value="Lecture Notes">Lecture Notes</option>
-                                <option value="Assignment">Assignment</option>
-                                <option value="Tutorial">Tutorial</option>
-                                <option value="Reference Material">Reference Material</option>
-                                <option value="Lab Manual">Lab Manual</option>
-                                <option value="Past Papers">Past Papers</option>
-                                <option value="Study Guide">Study Guide</option>
-                            </select>
-                        </div>
+                    <!-- Modal Actions -->
+                    <div class="modal-actions">
+                        <button type="button" class="btn btn-secondary" id="cancel-upload">
+                            <i class="fas fa-times"></i> Cancel
+                        </button>
+                        <button type="button" class="btn btn-outline" id="save-draft">
+                            <i class="fas fa-save"></i> Save as Draft
+                        </button>
+                        <button type="submit" class="btn btn-primary" id="upload-resource">
+                            <i class="fas fa-upload"></i> Upload Resource
+                        </button>
                     </div>
-
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="modal-resource-level">Academic Level</label>
-                            <select id="modal-resource-level">
-                                <option value="">Select Level</option>
-                                <option value="Beginner">Beginner</option>
-                                <option value="Intermediate">Intermediate</option>
-                                <option value="Advanced">Advanced</option>
-                                <option value="Graduate">Graduate</option>
-                                <option value="Undergraduate">Undergraduate</option>
-                            </select>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="modal-resource-language">Language</label>
-                            <select id="modal-resource-language">
-                                <option value="English">English</option>
-                                <option value="Urdu">Urdu</option>
-                                <option value="Arabic">Arabic</option>
-                                <option value="French">French</option>
-                                <option value="Spanish">Spanish</option>
-                                <option value="Other">Other</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="modal-resource-description">Description</label>
-                        <textarea id="modal-resource-description" rows="4" placeholder="Provide a detailed description of the resource content, learning objectives, and any prerequisites..."></textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="modal-resource-tags">Tags (comma-separated)</label>
-                        <input type="text" id="modal-resource-tags" placeholder="e.g., algorithms, data structures, programming, basics">
-                        <small class="form-help">Add relevant tags to help others find this resource</small>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group checkbox-group">
-                            <label class="checkbox-label">
-                                <input type="checkbox" id="modal-resource-featured">
-                                <span class="checkbox-custom"></span>
-                                Mark as Featured Resource
-                            </label>
-                        </div>
-                        
-                        <div class="form-group checkbox-group">
-                            <label class="checkbox-label">
-                                <input type="checkbox" id="modal-resource-downloadable" checked>
-                                <span class="checkbox-custom"></span>
-                                Allow Download
-                            </label>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Modal Actions -->
-                <div class="modal-actions">
-                    <button type="button" class="btn btn-secondary" id="cancel-upload">
-                        <i class="fas fa-times"></i> Cancel
-                    </button>
-                    <button type="button" class="btn btn-outline" id="save-draft">
-                        <i class="fas fa-save"></i> Save as Draft
-                    </button>
-                    <button type="submit" class="btn btn-primary" id="upload-resource">
-                        <i class="fas fa-upload"></i> Upload Resource
-                    </button>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
     </div>
-</div>
+    <footer id="footer-container">
+
+    </footer>
 
     <script src="js/elibrary.js"></script>
+
+    <script>
+
+       const loggedIn = localStorage.getItem('loggedIn');
+       const getUserRole = localStorage.getItem('role');
+
+        if (loggedIn === 'false') {
+
+            // Load the header component
+            fetch('components/main-header.html')
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('header-in-elibrary').innerHTML = html;
+
+                    // Load mobile menu script AFTER header is injected
+                    const script = document.createElement('script');
+                    script.src = 'js/mobile-menu.js';
+                    script.onload = function () {
+                        // Initialize navigation after script loads
+                        setTimeout(() => {
+                            if (window.initializeNavigation) {
+                                window.initializeNavigation();
+                            }
+                        }, 50);
+                    };
+                    document.body.appendChild(script);
+                });
+        }
+        else if (getUserRole === 'student' && loggedIn === 'true') {
+            // Load the header component
+            fetch('components/header-student.html')
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('header-in-elibrary').innerHTML = html; // Adjust ID as needed
+
+                    // Load mobile menu script AFTER header is injected
+                    const script = document.createElement('script');
+                    script.src = 'js/mobile-menu.js';
+                    script.onload = function () {
+                        // Initialize navigation after script loads
+                        setTimeout(() => {
+                            if (window.initializeNavigation) {
+                                window.initializeNavigation();
+                            }
+                        }, 50);
+                    };
+                    document.body.appendChild(script);
+                });
+
+        }
+
+        else if (getUserRole === 'teacher' && loggedIn === 'true') {
+            // Load the header component
+            fetch('components/header-teacher.html')
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('header-in-elibrary').innerHTML = html; // Adjust ID as needed
+
+                    // Load mobile menu script AFTER header is injected
+                    const script = document.createElement('script');
+                    script.src = 'js/mobile-menu.js';
+                    script.onload = function () {
+                        // Initialize navigation after script loads
+                        setTimeout(() => {
+                            if (window.initializeNavigation) {
+                                window.initializeNavigation();
+                            }
+                        }, 50);
+                    };
+                    document.body.appendChild(script);
+                });
+
+        }
+
+        // Load the Footer component
+        fetch('components/footer.html')
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById('footer-container').innerHTML = html;
+            });
+    </script>
 </body>
+
 </html>

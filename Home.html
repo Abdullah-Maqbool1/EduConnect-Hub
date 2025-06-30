@@ -179,28 +179,35 @@
     <footer id="footer-container">
 
     </footer>
-    <script>
+<script>
+    // Load the header component
+    fetch('components/main-header.html')
+        .then(response => response.text())
+        .then(html => {
+            document.getElementById('header-in-Home').innerHTML = html;
 
-        // Load the header component
-        fetch('components/main-header.html')
-            .then(response => response.text())
-            .then(html => {
-                document.getElementById('header-in-Home').innerHTML = html;
+            // Load mobile menu script AFTER header is injected
+            const script = document.createElement('script');
+            script.src = 'js/mobile-menu.js';
+            script.onload = function() {
+                // Initialize navigation after script loads
+                setTimeout(() => {
+                    if (window.initializeNavigation) {
+                        window.initializeNavigation();
+                    }
+                }, 50);
+            };
+            document.body.appendChild(script);
+        });
 
-                // Load mobile menu script AFTER header is injected
-                const script = document.createElement('script');
-                script.src = 'js/mobile-menu.js';
-                document.body.appendChild(script);
-            });
+    // Load the Footer component
+    fetch('components/footer.html')
+        .then(response => response.text())
+        .then(html => {
+            document.getElementById('footer-container').innerHTML = html;
+        });
+</script>
 
-        // Load the header component
-        fetch('components/footer.html')
-            .then(response => response.text())
-            .then(html => {
-                document.getElementById('footer-container').innerHTML = html;
-            });
-    </script>
-
-</body>
+</body> 
 
 </html>

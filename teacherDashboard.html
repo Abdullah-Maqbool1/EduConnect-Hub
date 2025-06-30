@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,7 +9,13 @@
   <link rel="stylesheet" href="assets/css/teacherDashboard.css" />
   <script defer src="../js/teacherDashboard.js"></script>
 </head>
+
 <body>
+
+  <header id="header-in-teacher-dashboard">
+
+    </header>
+
   <div class="dashboard-container">
     <section class="overview-panel">
       <h2>Welcome, <span id="teacherName"></span> 👋</h2>
@@ -52,5 +59,36 @@
       </ul>
     </section>
   </div>
+
+
+  <script>
+    // Load the header component
+    fetch('components/header-teacher.html')
+      .then(response => response.text())
+      .then(html => {
+        document.getElementById('header-in-teacher-dashboard').innerHTML = html; // Adjust ID as needed
+
+        // Load mobile menu script AFTER header is injected
+        const script = document.createElement('script');
+        script.src = 'js/mobile-menu.js';
+        script.onload = function () {
+          // Initialize navigation after script loads
+          setTimeout(() => {
+            if (window.initializeNavigation) {
+              window.initializeNavigation();
+            }
+          }, 50);
+        };
+        document.body.appendChild(script);
+      });
+
+    // Load the Footer component
+    fetch('components/footer.html')
+      .then(response => response.text())
+      .then(html => {
+        document.getElementById('footer-container').innerHTML = html;
+      });
+  </script>
 </body>
+
 </html>

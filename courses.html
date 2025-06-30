@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,8 +10,12 @@
     <link rel="stylesheet" href="assets/css/studentHeaderStyle.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body>
 
+<body>
+    <!-- Header -->
+    <header id="header-in-courses">
+
+    </header>
     <div class="container">
         <div class="page-header">
             <h1>Available Courses</h1>
@@ -23,7 +28,7 @@
                 <i class="fas fa-search"></i>
                 <input type="text" id="searchInput" placeholder="Search courses by title...">
             </div>
-            
+
             <div class="filter-section">
                 <select id="subjectFilter">
                     <option value="">All Subjects</option>
@@ -69,13 +74,13 @@
                     <i class="fas fa-times"></i>
                 </button>
             </div>
-            
+
             <form id="addCourseForm" class="modal-content">
                 <div class="form-group">
                     <label for="courseTitle">Course Title *</label>
                     <input type="text" id="courseTitle" required>
                 </div>
-                
+
                 <div class="form-group">
                     <label for="courseSubject">Subject *</label>
                     <select id="courseSubject" required>
@@ -92,12 +97,12 @@
                         <option value="Art">Art</option>
                     </select>
                 </div>
-                
+
                 <div class="form-group">
                     <label for="courseDescription">Description *</label>
                     <textarea id="courseDescription" rows="4" required></textarea>
                 </div>
-                
+
                 <div class="modal-actions">
                     <button type="button" class="cancel-btn" id="cancelBtn">Cancel</button>
                     <button type="submit" class="submit-btn">Create Course</button>
@@ -105,7 +110,72 @@
             </form>
         </div>
     </div>
+    <footer id="footer-container">
+
+    </footer>
+
 
     <script src="js/courses.js"></script>
+
+
+    <script>
+
+        const loggedIn = localStorage.getItem('loggedIn');
+        const getUserRole = localStorage.getItem('role');
+
+
+        if (getUserRole === 'student' && loggedIn === 'true') {
+            // Load the header component
+            fetch('components/header-student.html')
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('header-in-courses').innerHTML = html; // Adjust ID as needed
+
+                    // Load mobile menu script AFTER header is injected
+                    const script = document.createElement('script');
+                    script.src = 'js/mobile-menu.js';
+                    script.onload = function () {
+                        // Initialize navigation after script loads
+                        setTimeout(() => {
+                            if (window.initializeNavigation) {
+                                window.initializeNavigation();
+                            }
+                        }, 50);
+                    };
+                    document.body.appendChild(script);
+                });
+        }
+
+        else if (getUserRole === 'teacher' && loggedIn === 'true') {
+            // Load the header component
+            fetch('components/header-teacher.html')
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('header-in-courses').innerHTML = html; // Adjust ID as needed
+
+                    // Load mobile menu script AFTER header is injected
+                    const script = document.createElement('script');
+                    script.src = 'js/mobile-menu.js';
+                    script.onload = function () {
+                        // Initialize navigation after script loads
+                        setTimeout(() => {
+                            if (window.initializeNavigation) {
+                                window.initializeNavigation();
+                            }
+                        }, 50);
+                    };
+                    document.body.appendChild(script);
+                });
+
+        }
+
+        // Load the Footer component
+        fetch('components/footer.html')
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById('footer-container').innerHTML = html;
+            });
+    </script>
 </body>
+
 </html>
