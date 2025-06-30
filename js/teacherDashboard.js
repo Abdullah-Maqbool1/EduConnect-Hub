@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   const name = localStorage.getItem("name") || "Teacher";
   const role = localStorage.getItem("role");
-  if (role !== "teacher") window.location.href = "../index.html";
+  if (role !== "teacher") window.location.href = "../Home.html";
 
   document.getElementById("teacherName").textContent = name;
 
