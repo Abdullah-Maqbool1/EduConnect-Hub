@@ -318,7 +318,7 @@ class StudentDashboard {
     }
 
     handleUploadMaterial() {
-         window.location.href = 'CourseMaterialPage.html';
+         window.location.href = 'course-material.html';
         // Check if CourseMaterialPage.html exists, otherwise show placeholder
         // if (this.pageExists('CourseMaterialPage.html')) {
            
