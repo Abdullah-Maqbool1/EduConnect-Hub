@@ -136,6 +136,7 @@
   border-radius: 50%;
   object-fit: cover;
   margin-bottom: var(--mb-2);
+  
 }
 
 .team-card h3 {
@@ -162,13 +163,15 @@
 }
 
 .social-icons a {
-  color: var(--text-color-paragraph);
+   color: #414141 !important; 
+  background: var(--secondary-color); 
+ 
   font-size: 1.2rem;
   transition: color 0.3s ease;
 }
 
 .social-icons a:hover {
-  color: var(--primary-color);
+ transform: translateY(-2px);
 }
 
 .team-card:hover {
