@@ -8,6 +8,7 @@
   margin: 0 auto;
   padding-left: 20px;
   padding-right: 20px;
+  margin-top: var(--mb-5);
 }
 
 /* Introduction Section */
