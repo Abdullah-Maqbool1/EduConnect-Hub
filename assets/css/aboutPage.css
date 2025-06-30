@@ -219,6 +219,7 @@
   background-color: var(--primary-color);
   color: var(--secondary-color);
   border-radius: var(--border-radius);
+  margin-bottom: var(--mb-6);
 }
 
 .join-us-section h2 {
