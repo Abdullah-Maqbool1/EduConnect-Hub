@@ -17,7 +17,7 @@ const teamData = [
     bio: "An experienced teacher fostering collaboration in classrooms.",
     social: {
       github: "https://github.com/muz1058",
-      linkedin: "https://linkedin.com/in/",
+      linkedin: "https://www.linkedin.com/in/muzaffar-ali-1177672a6?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
       instagram: "https://instagram.com/"
     }
   },
