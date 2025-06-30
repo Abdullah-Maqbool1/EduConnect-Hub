@@ -136,6 +136,7 @@
   border-radius: 50%;
   object-fit: cover;
   margin-bottom: var(--mb-2);
+  
 }
 
 .team-card h3 {
