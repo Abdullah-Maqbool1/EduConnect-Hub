@@ -164,10 +164,9 @@
 }
 
 .social-icons a {
-   color: #414141 !important; 
-  background: var(--secondary-color); 
- 
-  font-size: 1.2rem;
+
+   color: #000 !important; 
+   font-size: 1.2rem;
   transition: color 0.3s ease;
 }
 
