@@ -6,7 +6,7 @@ const teamData = [
     bio: "A student coder building innovative tools for learning.",
     social: {
       github: "https://github.com/areefurrahman",
-      linkedin: "https://linkedin.com/",
+      linkedin: "https://linkedin.com/areef-ur-rahman",
       instagram: "https://instagram.com/"
     }
   },
@@ -28,7 +28,7 @@ const teamData = [
     bio: "Representing student voices to shape the platform.",
     social: {
       github: "https://github.com/Abdullah-Maqbool1",
-      linkedin: "https://pk.linkedin.com/in/areef-ur-rahman",
+      linkedin: "https://pk.linkedin.com/in/",
       instagram: "https://instagram.com"
     }
   }
