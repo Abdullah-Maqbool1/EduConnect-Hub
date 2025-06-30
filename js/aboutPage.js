@@ -7,7 +7,7 @@ const teamData = [
     social: {
       github: "https://github.com/areefurrahman",
       linkedin: "https://linkedin.com/areef-ur-rahman",
-      instagram: "https://instagram.com/"
+      instagram: "https://www.instagram.com/areef_ur_rahman"
     }
   },
   {
@@ -18,7 +18,7 @@ const teamData = [
     social: {
       github: "https://github.com/muz1058",
       linkedin: "https://www.linkedin.com/in/muzaffar-ali-1177672a6?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
-      instagram: "https://instagram.com/"
+      instagram: "https://www.instagram.com/muzaffar.ali257"
     }
   },
   {
@@ -29,7 +29,7 @@ const teamData = [
     social: {
       github: "https://github.com/Abdullah-Maqbool1",
       linkedin: "https://pk.linkedin.com/in/",
-      instagram: "https://instagram.com"
+      instagram: "https://www.instagram.com/abdullah__maqbool/"
     }
   }
 ];
